@@ -1,6 +1,6 @@
-# İlk 90 Gün: Veriyle Darboğazı Kırmak
+# Endüstriyel Optimizasyon Projesi: Hat-1 Kapasite ve Teslimat İyileştirme
 
-Bir endüstri mühendisinin işe başladığı ilk 90 günde yürüttüğü uçtan uca iyileştirme projesi:
+Bir üretim hattında 90 günde yürütülen uçtan uca veri analitiği ve optimizasyon projesi:
 **veri modeli → istatistiksel analiz → talep tahmini → kesikli olay simülasyonu → optimizasyon →
 Monte Carlo yatırım analizi → Power BI paneli → yönetim sunumu.**
 

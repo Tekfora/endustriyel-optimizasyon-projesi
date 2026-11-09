@@ -33,7 +33,7 @@ GECMIS_BASLANGIC = pd.Timestamp("2023-10-01")  # ERP aylık satış geçmişi
 BAZ_BASLANGIC = pd.Timestamp("2025-10-01")     # MES detay verisi başlangıcı
 PILOT_BASLANGIC = pd.Timestamp("2026-10-01")   # SMED + TPM + vardiya standardı pilotu
 BITIS = pd.Timestamp("2026-10-31")
-ISE_BASLAMA = pd.Timestamp("2026-08-03")       # Endüstri mühendisinin ilk iş günü
+ISE_BASLAMA = pd.Timestamp("2026-08-03")       # Proje başlangıcı
 TAHMIN_UFKU_AY = 6                              # Kasım 2026 – Nisan 2027
 
 VARDIYALAR = ["A", "B", "C"]
