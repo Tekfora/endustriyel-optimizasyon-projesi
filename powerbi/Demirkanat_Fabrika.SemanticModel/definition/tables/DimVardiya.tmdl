@@ -1,0 +1,33 @@
+table 'DimVardiya'
+	lineageTag: d302ef92-65e5-5ec0-92ba-161697c906dd
+
+	column 'VardiyaID'
+		dataType: string
+		isHidden
+		lineageTag: ba84ce5b-7a30-5a05-83ab-5e849839fb36
+		summarizeBy: none
+		sourceColumn: "VardiyaID"
+
+	column 'Vardiya'
+		dataType: string
+		lineageTag: 6e3fa00c-faa1-5584-91c8-9dcf74f83055
+		summarizeBy: none
+		sourceColumn: "Vardiya"
+
+	column 'Vardiya Tipi'
+		dataType: string
+		lineageTag: a91d2daf-70b3-5c18-9e3b-4d8cf54edc25
+		summarizeBy: none
+		sourceColumn: "Vardiya Tipi"
+
+	partition 'DimVardiya' = m
+		mode: import
+		source =
+				let
+				    Kaynak = Csv.Document(File.Contents(VeriKlasoru & "DimVardiya.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Basliklar = Table.PromoteHeaders(Kaynak, [PromoteAllScalars = true]),
+				    Tipler = Table.TransformColumnTypes(Basliklar, {{"VardiyaID", type text}, {"Vardiya", type text}, {"Vardiya Tipi", type text}}, "en-US")
+				in
+				    Tipler
+
+	annotation PBI_ResultType = Table

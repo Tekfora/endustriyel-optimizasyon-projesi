@@ -1,0 +1,93 @@
+table 'FaktOlcum'
+	lineageTag: 5b644891-22e5-50ac-bca9-1c962fd7b1ae
+
+	column 'Tarih'
+		dataType: dateTime
+		isHidden
+		formatString: dd.mm.yyyy
+		lineageTag: 8370e885-8054-541e-bb92-e95c349e324b
+		summarizeBy: none
+		sourceColumn: "Tarih"
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'VardiyaID'
+		dataType: string
+		isHidden
+		lineageTag: aa3aab63-fdb5-563c-bd29-f24d7cac23bb
+		summarizeBy: none
+		sourceColumn: "VardiyaID"
+
+	column 'MakineID'
+		dataType: string
+		isHidden
+		lineageTag: b1628c69-2025-5b4c-9700-24fa29202fd1
+		summarizeBy: none
+		sourceColumn: "MakineID"
+
+	column 'UrunID'
+		dataType: string
+		isHidden
+		lineageTag: 1f72ac87-0507-5850-b054-4d16c15a83e1
+		summarizeBy: none
+		sourceColumn: "UrunID"
+
+	column 'AltGrupNo'
+		dataType: int64
+		isHidden
+		formatString: #,0
+		lineageTag: 3116a915-2b52-57ab-9ace-7b03c8e4da1d
+		summarizeBy: none
+		sourceColumn: "AltGrupNo"
+
+	column 'OlcumNo'
+		dataType: int64
+		isHidden
+		formatString: #,0
+		lineageTag: 56161d88-7513-5238-af53-b6620d550e30
+		summarizeBy: none
+		sourceColumn: "OlcumNo"
+
+	column 'CapMm'
+		dataType: double
+		isHidden
+		formatString: #,0.00
+		lineageTag: 012fa01d-f621-5ae6-84f0-1bd24f2f7ec6
+		summarizeBy: none
+		sourceColumn: "CapMm"
+
+	column 'Nominal'
+		dataType: double
+		isHidden
+		formatString: #,0.00
+		lineageTag: f1c76a6c-cf6c-5ef2-b2c6-18b025cb43f9
+		summarizeBy: none
+		sourceColumn: "Nominal"
+
+	column 'LSL'
+		dataType: double
+		isHidden
+		formatString: #,0.00
+		lineageTag: 7c6c46f2-99cd-5f0b-bab7-e528d7bde3c1
+		summarizeBy: none
+		sourceColumn: "LSL"
+
+	column 'USL'
+		dataType: double
+		isHidden
+		formatString: #,0.00
+		lineageTag: 5e2eeb68-b0b8-5f48-8c5b-2a7472e7adcd
+		summarizeBy: none
+		sourceColumn: "USL"
+
+	partition 'FaktOlcum' = m
+		mode: import
+		source =
+				let
+				    Kaynak = Csv.Document(File.Contents(VeriKlasoru & "FaktOlcum.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Basliklar = Table.PromoteHeaders(Kaynak, [PromoteAllScalars = true]),
+				    Tipler = Table.TransformColumnTypes(Basliklar, {{"Tarih", type date}, {"VardiyaID", type text}, {"MakineID", type text}, {"UrunID", type text}, {"AltGrupNo", Int64.Type}, {"OlcumNo", Int64.Type}, {"CapMm", type number}, {"Nominal", type number}, {"LSL", type number}, {"USL", type number}}, "en-US")
+				in
+				    Tipler
+
+	annotation PBI_ResultType = Table

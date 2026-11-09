@@ -1,0 +1,12 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/pagesMetadata/1.0.0/schema.json",
+  "pageOrder": [
+    "p1_ozet",
+    "p2_oee",
+    "p3_durus",
+    "p4_kalite",
+    "p5_teslimat",
+    "p6_senaryo"
+  ],
+  "activePageName": "p1_ozet"
+}

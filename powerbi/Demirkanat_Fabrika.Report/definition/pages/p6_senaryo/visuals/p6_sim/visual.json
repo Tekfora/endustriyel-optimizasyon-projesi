@@ -1,0 +1,112 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.4.0/schema.json",
+  "name": "p6_sim",
+  "position": {
+    "x": 660,
+    "y": 80,
+    "z": 3000,
+    "height": 300,
+    "width": 600,
+    "tabOrder": 3000
+  },
+  "visual": {
+    "visualType": "clusteredBarChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "SimKapasite"
+                    }
+                  },
+                  "Property": "Senaryo Adı"
+                }
+              },
+              "queryRef": "SimKapasite.Senaryo Adı",
+              "nativeQueryRef": "Senaryo Adı",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Ölçüler"
+                    }
+                  },
+                  "Property": "Sim Haftalık Çıktı"
+                }
+              },
+              "queryRef": "_Ölçüler.Sim Haftalık Çıktı",
+              "nativeQueryRef": "Sim Haftalık Çıktı"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "SimKapasite"
+                  }
+                },
+                "Property": "Senaryo Adı"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "objects": {
+      "labels": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Simülasyon: azami haftalık çıktı (adet)'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

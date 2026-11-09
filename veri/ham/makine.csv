@@ -1,0 +1,10 @@
+MakineID,MakineKodu,Makine,Hat,Istasyon,RotaSirasi,SonIstasyon
+M01,H1-TST,Şerit Testere,Hat-1,Kesim,1,0
+M02,H1-TRN1,CNC Torna 1,Hat-1,CNC Torna,2,0
+M03,H1-TRN2,CNC Torna 2,Hat-1,CNC Torna,2,0
+M04,H1-FRZ,CNC İşleme Merkezi,Hat-1,CNC Freze,3,0
+M05,H1-ISL,Endüksiyon Sertleştirme,Hat-1,Isıl İşlem,4,0
+M06,H1-TSL,Silindirik Taşlama,Hat-1,Taşlama,5,1
+M07,H2-DTR,CNC Dik Torna,Hat-2,Dik Torna,1,0
+M08,H2-DLK,CNC Delik Delme,Hat-2,Delme,2,0
+M09,H2-BLN,Balans Makinesi,Hat-2,Balans,3,1

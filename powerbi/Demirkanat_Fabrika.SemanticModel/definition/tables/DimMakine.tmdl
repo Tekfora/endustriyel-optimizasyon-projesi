@@ -1,0 +1,66 @@
+table 'DimMakine'
+	lineageTag: 33fc9720-08bf-5186-848f-241baf33582b
+
+	column 'MakineID'
+		dataType: string
+		isHidden
+		lineageTag: ad5163d2-d861-5489-a6e2-dcf70e14ccb6
+		summarizeBy: none
+		sourceColumn: "MakineID"
+
+	column 'Makine Kodu'
+		dataType: string
+		lineageTag: 76b4d5e1-a266-508c-8680-24bfbee7a326
+		summarizeBy: none
+		sourceColumn: "Makine Kodu"
+		sortByColumn: 'MakineID'
+
+	column 'Makine'
+		dataType: string
+		lineageTag: a10a4f4d-7abd-565c-9a78-c040d838fcf5
+		summarizeBy: none
+		sourceColumn: "Makine"
+
+	column 'Hat'
+		dataType: string
+		lineageTag: 46d7e530-bea7-50b0-aa22-c69325a3b62b
+		summarizeBy: none
+		sourceColumn: "Hat"
+
+	column 'İstasyon'
+		dataType: string
+		lineageTag: 6127a93a-922a-5a2c-baf7-eb1d3309b75f
+		summarizeBy: none
+		sourceColumn: "İstasyon"
+
+	column 'Rota Sırası'
+		dataType: int64
+		formatString: #,0
+		lineageTag: 1b05e798-ccc6-5b70-99b9-22843e40126a
+		summarizeBy: none
+		sourceColumn: "Rota Sırası"
+
+	column 'Son İstasyon'
+		dataType: int64
+		formatString: #,0
+		lineageTag: 61142efe-37b6-5a39-b8ac-5f802ec1b256
+		summarizeBy: none
+		sourceColumn: "Son İstasyon"
+
+	column 'Darboğaz'
+		dataType: string
+		lineageTag: 21e23c7a-fbce-5a60-92ea-8684e46c1382
+		summarizeBy: none
+		sourceColumn: "Darboğaz"
+
+	partition 'DimMakine' = m
+		mode: import
+		source =
+				let
+				    Kaynak = Csv.Document(File.Contents(VeriKlasoru & "DimMakine.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Basliklar = Table.PromoteHeaders(Kaynak, [PromoteAllScalars = true]),
+				    Tipler = Table.TransformColumnTypes(Basliklar, {{"MakineID", type text}, {"Makine Kodu", type text}, {"Makine", type text}, {"Hat", type text}, {"İstasyon", type text}, {"Rota Sırası", Int64.Type}, {"Son İstasyon", Int64.Type}, {"Darboğaz", type text}}, "en-US")
+				in
+				    Tipler
+
+	annotation PBI_ResultType = Table

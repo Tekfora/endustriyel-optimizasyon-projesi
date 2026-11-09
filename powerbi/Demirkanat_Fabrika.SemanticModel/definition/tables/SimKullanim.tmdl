@@ -1,0 +1,42 @@
+table 'SimKullanim'
+	lineageTag: 6cd35568-fb50-58be-a03a-c62648c36451
+
+	column 'Senaryo'
+		dataType: string
+		lineageTag: 13ff7323-baa5-59ef-adef-9892303091be
+		summarizeBy: none
+		sourceColumn: "Senaryo"
+
+	column 'İstasyon'
+		dataType: string
+		lineageTag: 4cfb22ff-8e51-5fae-8433-e664d12d3ea6
+		summarizeBy: none
+		sourceColumn: "İstasyon"
+		sortByColumn: 'İstasyon Sırası'
+
+	column 'İstasyon Sırası'
+		dataType: int64
+		isHidden
+		formatString: #,0
+		lineageTag: 8f4e5813-2b5e-58e2-9816-360306da4997
+		summarizeBy: none
+		sourceColumn: "İstasyon Sırası"
+
+	column 'Kullanım'
+		dataType: double
+		formatString: 0%
+		lineageTag: 82920ca3-4cb2-5ddd-b6d1-8333c12dce09
+		summarizeBy: none
+		sourceColumn: "Kullanım"
+
+	partition 'SimKullanim' = m
+		mode: import
+		source =
+				let
+				    Kaynak = Csv.Document(File.Contents(VeriKlasoru & "SimKullanim.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Basliklar = Table.PromoteHeaders(Kaynak, [PromoteAllScalars = true]),
+				    Tipler = Table.TransformColumnTypes(Basliklar, {{"Senaryo", type text}, {"İstasyon", type text}, {"İstasyon Sırası", Int64.Type}, {"Kullanım", type number}}, "en-US")
+				in
+				    Tipler
+
+	annotation PBI_ResultType = Table

@@ -1,0 +1,122 @@
+table 'FaktSiparis'
+	lineageTag: 4b516860-ff52-5c5f-b187-cd85032f38df
+
+	column 'SiparisNo'
+		dataType: string
+		lineageTag: e8e74363-4f06-5625-bbf0-cc2b9eeed1fa
+		summarizeBy: none
+		sourceColumn: "SiparisNo"
+
+	column 'MusteriID'
+		dataType: string
+		isHidden
+		lineageTag: ec5d07c5-7038-5270-954a-46b702a6e5ed
+		summarizeBy: none
+		sourceColumn: "MusteriID"
+
+	column 'UrunID'
+		dataType: string
+		isHidden
+		lineageTag: 59628f4d-6276-5b74-abf3-83e8e98cb307
+		summarizeBy: none
+		sourceColumn: "UrunID"
+
+	column 'SiparisTarihi'
+		dataType: dateTime
+		formatString: dd.mm.yyyy
+		lineageTag: fe78cc19-dc61-5425-802b-992267726aa2
+		summarizeBy: none
+		sourceColumn: "SiparisTarihi"
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'TerminTarihi'
+		dataType: dateTime
+		formatString: dd.mm.yyyy
+		lineageTag: bbbbc542-9ac4-520f-883e-243fef2a8558
+		summarizeBy: none
+		sourceColumn: "TerminTarihi"
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Adet'
+		dataType: int64
+		isHidden
+		formatString: #,0
+		lineageTag: 7071b723-3233-5fe1-bcb7-d20f4161a5fc
+		summarizeBy: none
+		sourceColumn: "Adet"
+
+	column 'BirimFiyat'
+		dataType: double
+		isHidden
+		formatString: #,0.00
+		lineageTag: 8d491ccd-68af-531f-85bf-3945fa321d9e
+		summarizeBy: none
+		sourceColumn: "BirimFiyat"
+
+	column 'Tutar'
+		dataType: double
+		isHidden
+		formatString: #,0.00
+		lineageTag: 625c25aa-e537-53ff-a693-d2c155dd1e17
+		summarizeBy: none
+		sourceColumn: "Tutar"
+
+	column 'SevkTarihi'
+		dataType: dateTime
+		formatString: dd.mm.yyyy
+		lineageTag: 4edd2178-726c-5bab-86b5-6ae59e09c313
+		summarizeBy: none
+		sourceColumn: "SevkTarihi"
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'GecikmeGun'
+		dataType: int64
+		formatString: #,0
+		lineageTag: 7df38255-5564-54ad-a5e7-7f87c0049edf
+		summarizeBy: none
+		sourceColumn: "GecikmeGun"
+
+	column 'ZamanindaMi'
+		dataType: int64
+		isHidden
+		formatString: #,0
+		lineageTag: 40f9b6a0-3444-5053-9fdc-1b57f7cd4ef2
+		summarizeBy: none
+		sourceColumn: "ZamanindaMi"
+
+	column 'Durum'
+		dataType: string
+		lineageTag: 63219a14-dbcc-5af0-a257-071b8ea387ed
+		summarizeBy: none
+		sourceColumn: "Durum"
+
+	column 'CezaTutariTL'
+		dataType: double
+		isHidden
+		formatString: #,0.00
+		lineageTag: dfbad01c-8c95-5c06-8c03-1182ef453688
+		summarizeBy: none
+		sourceColumn: "CezaTutariTL"
+
+	column 'EkspresNakliyeTL'
+		dataType: double
+		isHidden
+		formatString: #,0.00
+		lineageTag: c285a192-85ab-5e5e-b051-955a87f405e4
+		summarizeBy: none
+		sourceColumn: "EkspresNakliyeTL"
+
+	partition 'FaktSiparis' = m
+		mode: import
+		source =
+				let
+				    Kaynak = Csv.Document(File.Contents(VeriKlasoru & "FaktSiparis.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Basliklar = Table.PromoteHeaders(Kaynak, [PromoteAllScalars = true]),
+				    Tipler = Table.TransformColumnTypes(Basliklar, {{"SiparisNo", type text}, {"MusteriID", type text}, {"UrunID", type text}, {"SiparisTarihi", type date}, {"TerminTarihi", type date}, {"Adet", Int64.Type}, {"BirimFiyat", type number}, {"Tutar", type number}, {"SevkTarihi", type date}, {"GecikmeGun", Int64.Type}, {"ZamanindaMi", Int64.Type}, {"Durum", type text}, {"CezaTutariTL", type number}, {"EkspresNakliyeTL", type number}}, "en-US")
+				in
+				    Tipler
+
+	annotation PBI_ResultType = Table

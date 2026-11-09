@@ -1,0 +1,197 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.4.0/schema.json",
+  "name": "p6_tahmin",
+  "position": {
+    "x": 20,
+    "y": 80,
+    "z": 2000,
+    "height": 300,
+    "width": 620,
+    "tabOrder": 2000
+  },
+  "visual": {
+    "visualType": "lineChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DimTarih"
+                    }
+                  },
+                  "Property": "Yıl-Ay"
+                }
+              },
+              "queryRef": "DimTarih.Yıl-Ay",
+              "nativeQueryRef": "Yıl-Ay",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Ölçüler"
+                    }
+                  },
+                  "Property": "Talep (adet)"
+                }
+              },
+              "queryRef": "_Ölçüler.Talep (adet)",
+              "nativeQueryRef": "Talep (adet)"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Ölçüler"
+                    }
+                  },
+                  "Property": "Talep Tahmini (adet)"
+                }
+              },
+              "queryRef": "_Ölçüler.Talep Tahmini (adet)",
+              "nativeQueryRef": "Talep Tahmini (adet)"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Ölçüler"
+                    }
+                  },
+                  "Property": "Tahmin Alt %80"
+                }
+              },
+              "queryRef": "_Ölçüler.Tahmin Alt %80",
+              "nativeQueryRef": "Tahmin Alt %80"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Ölçüler"
+                    }
+                  },
+                  "Property": "Tahmin Üst %80"
+                }
+              },
+              "queryRef": "_Ölçüler.Tahmin Üst %80",
+              "nativeQueryRef": "Tahmin Üst %80"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "dataPoint": [
+        {
+          "properties": {
+            "fill": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#52514E'"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "_Ölçüler.Talep (adet)"
+          }
+        },
+        {
+          "properties": {
+            "fill": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#2A78D6'"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "_Ölçüler.Talep Tahmini (adet)"
+          }
+        },
+        {
+          "properties": {
+            "fill": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#AEACA3'"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "_Ölçüler.Tahmin Alt %80"
+          }
+        },
+        {
+          "properties": {
+            "fill": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#AEACA3'"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "_Ölçüler.Tahmin Üst %80"
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Talep: gerçekleşen ve 6 aylık tahmin (%80 aralık)'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

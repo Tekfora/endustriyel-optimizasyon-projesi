@@ -1,0 +1,7 @@
+Hipotez,Test,İstatistik,p_degeri,Yorum,"Sonuç (α = 0,05)"
+Vardiya → H1-FRZ OEE,Tek yönlü ANOVA,F = 18.6,1.160808400154359e-08,"Ortalama OEE A %62,3, B %62,8, C %55,9",Anlamlı
+Vardiya → H1-FRZ OEE,Kruskal-Wallis (dağılımdan bağımsız),H = 50.1,1.3534964707858662e-11,ANOVA sonucunu doğruluyor,Anlamlı
+Vardiya → hurda oranı (Hat-1),Ki-kare bağımsızlık testi,χ² = 806,1.1616871782742842e-175,Gece vardiyasında hurda oranı anlamlı biçimde yüksek,Anlamlı
+Vardiyadaki duruş dakikaları → H1-FRZ vardiya çıktısı,Çoklu doğrusal regresyon (OLS),"ayar katsayısı = -1.14 adet/dk, R² = 0.73",2.8029440347758172e-127,H1-FRZ'de 1 dk duruş ≈ 1.14 sağlam parça kaybı,Anlamlı
+Pilot → H1-FRZ ayar süresi,Welch t-testi,t = 12.9,7.534376124732897e-19,Ortalama 74 dk → 29 dk,Anlamlı
+Pilot → H1-FRZ arıza sıklığı,Poisson oran testi (koşullu binom),9.20 → 5.94 arıza/100 çalışma saati,0.01225013448644877,TPM sonrası arıza sıklığı düştü,Anlamlı

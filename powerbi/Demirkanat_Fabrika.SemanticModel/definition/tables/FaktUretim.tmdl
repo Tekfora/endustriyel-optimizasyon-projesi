@@ -1,0 +1,117 @@
+table 'FaktUretim'
+	lineageTag: 4edab48e-7eda-56d2-8e1a-f3d3ea53acb9
+
+	column 'Tarih'
+		dataType: dateTime
+		isHidden
+		formatString: dd.mm.yyyy
+		lineageTag: 464549c0-529d-53ee-8bc5-4258a2ccd84f
+		summarizeBy: none
+		sourceColumn: "Tarih"
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'VardiyaID'
+		dataType: string
+		isHidden
+		lineageTag: 013731ec-afe5-53a8-9415-fed43e515c76
+		summarizeBy: none
+		sourceColumn: "VardiyaID"
+
+	column 'MakineID'
+		dataType: string
+		isHidden
+		lineageTag: 93d00c36-8453-5e83-a6b7-8315d16a7c1b
+		summarizeBy: none
+		sourceColumn: "MakineID"
+
+	column 'UrunID'
+		dataType: string
+		isHidden
+		lineageTag: b39f51e4-88f3-55d6-9cbf-f35538adadf2
+		summarizeBy: none
+		sourceColumn: "UrunID"
+
+	column 'FazlaMesai'
+		dataType: int64
+		isHidden
+		formatString: #,0
+		lineageTag: eac6149d-8fd2-5220-98cf-ecfe0319c4cf
+		summarizeBy: none
+		sourceColumn: "FazlaMesai"
+
+	column 'TakvimSuresiDk'
+		dataType: double
+		isHidden
+		formatString: #,0.00
+		lineageTag: 03ce0cc6-500f-54b6-a489-3b25a87f9ecd
+		summarizeBy: none
+		sourceColumn: "TakvimSuresiDk"
+
+	column 'PlanlananSureDk'
+		dataType: double
+		isHidden
+		formatString: #,0.00
+		lineageTag: 4959ab77-0266-5dbf-9d24-87d48e172721
+		summarizeBy: none
+		sourceColumn: "PlanlananSureDk"
+
+	column 'CalismaSuresiDk'
+		dataType: double
+		isHidden
+		formatString: #,0.00
+		lineageTag: 7d14a21c-ff0d-5d97-b09d-79c26ab5ff2b
+		summarizeBy: none
+		sourceColumn: "CalismaSuresiDk"
+
+	column 'UretilenAdet'
+		dataType: int64
+		isHidden
+		formatString: #,0
+		lineageTag: 332e7500-56a3-58f7-bf1e-d817e9ff50a7
+		summarizeBy: none
+		sourceColumn: "UretilenAdet"
+
+	column 'SaglamAdet'
+		dataType: int64
+		isHidden
+		formatString: #,0
+		lineageTag: e17838cf-5f86-5f82-b494-94fc735e7412
+		summarizeBy: none
+		sourceColumn: "SaglamAdet"
+
+	column 'HurdaAdet'
+		dataType: int64
+		isHidden
+		formatString: #,0
+		lineageTag: ec560743-eae9-56ba-85bc-e3a5a33f4402
+		summarizeBy: none
+		sourceColumn: "HurdaAdet"
+
+	column 'IdealSureDk'
+		dataType: double
+		isHidden
+		formatString: #,0.00
+		lineageTag: 49fe4a5a-6473-57dc-8ffd-85408162060c
+		summarizeBy: none
+		sourceColumn: "IdealSureDk"
+
+	column 'HurdaMaliyetiTL'
+		dataType: double
+		isHidden
+		formatString: #,0.00
+		lineageTag: c08c68c1-c178-5e52-a0a3-d49b38dee576
+		summarizeBy: none
+		sourceColumn: "HurdaMaliyetiTL"
+
+	partition 'FaktUretim' = m
+		mode: import
+		source =
+				let
+				    Kaynak = Csv.Document(File.Contents(VeriKlasoru & "FaktUretim.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Basliklar = Table.PromoteHeaders(Kaynak, [PromoteAllScalars = true]),
+				    Tipler = Table.TransformColumnTypes(Basliklar, {{"Tarih", type date}, {"VardiyaID", type text}, {"MakineID", type text}, {"UrunID", type text}, {"FazlaMesai", Int64.Type}, {"TakvimSuresiDk", type number}, {"PlanlananSureDk", type number}, {"CalismaSuresiDk", type number}, {"UretilenAdet", Int64.Type}, {"SaglamAdet", Int64.Type}, {"HurdaAdet", Int64.Type}, {"IdealSureDk", type number}, {"HurdaMaliyetiTL", type number}}, "en-US")
+				in
+				    Tipler
+
+	annotation PBI_ResultType = Table

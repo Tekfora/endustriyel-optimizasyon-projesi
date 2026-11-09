@@ -1,0 +1,165 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.4.0/schema.json",
+  "name": "p2_bilesen",
+  "position": {
+    "x": 20,
+    "y": 424,
+    "z": 5000,
+    "height": 284,
+    "width": 1240,
+    "tabOrder": 5000
+  },
+  "visual": {
+    "visualType": "clusteredColumnChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DimMakine"
+                    }
+                  },
+                  "Property": "Makine Kodu"
+                }
+              },
+              "queryRef": "DimMakine.Makine Kodu",
+              "nativeQueryRef": "Makine Kodu",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Ölçüler"
+                    }
+                  },
+                  "Property": "Kullanılabilirlik"
+                }
+              },
+              "queryRef": "_Ölçüler.Kullanılabilirlik",
+              "nativeQueryRef": "Kullanılabilirlik"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Ölçüler"
+                    }
+                  },
+                  "Property": "Performans"
+                }
+              },
+              "queryRef": "_Ölçüler.Performans",
+              "nativeQueryRef": "Performans"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Ölçüler"
+                    }
+                  },
+                  "Property": "Kalite"
+                }
+              },
+              "queryRef": "_Ölçüler.Kalite",
+              "nativeQueryRef": "Kalite"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "dataPoint": [
+        {
+          "properties": {
+            "fill": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#2A78D6'"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "_Ölçüler.Kullanılabilirlik"
+          }
+        },
+        {
+          "properties": {
+            "fill": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#1BAF7A'"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "_Ölçüler.Performans"
+          }
+        },
+        {
+          "properties": {
+            "fill": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#EDA100'"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "_Ölçüler.Kalite"
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'OEE bileşenleri, makine bazında'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

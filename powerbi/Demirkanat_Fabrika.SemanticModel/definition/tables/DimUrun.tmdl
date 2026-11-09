@@ -1,0 +1,59 @@
+table 'DimUrun'
+	lineageTag: fbb3477e-2df7-561c-b24d-769a51d78b13
+
+	column 'UrunID'
+		dataType: string
+		isHidden
+		lineageTag: ae1c7e5e-dcfe-5e36-bf55-ae6436af2f7e
+		summarizeBy: none
+		sourceColumn: "UrunID"
+
+	column 'Ürün Kodu'
+		dataType: string
+		lineageTag: 2e83eb10-73c1-5363-91bd-9d04b5119271
+		summarizeBy: none
+		sourceColumn: "Ürün Kodu"
+
+	column 'Ürün'
+		dataType: string
+		lineageTag: 182866ad-9066-5fe6-8678-df481dea71ec
+		summarizeBy: none
+		sourceColumn: "Ürün"
+
+	column 'Ürün Ailesi'
+		dataType: string
+		lineageTag: 5296c61b-6b3c-5166-add7-62b50958a42f
+		summarizeBy: none
+		sourceColumn: "Ürün Ailesi"
+
+	column 'Hat'
+		dataType: string
+		lineageTag: 62bc9bc3-fdb9-55e6-9ced-e9273ce5a1da
+		summarizeBy: none
+		sourceColumn: "Hat"
+
+	column 'Birim Fiyat'
+		dataType: double
+		formatString: #,0
+		lineageTag: 3a27128a-891c-5fd5-a904-71b368311e5a
+		summarizeBy: none
+		sourceColumn: "Birim Fiyat"
+
+	column 'Standart Maliyet'
+		dataType: double
+		formatString: #,0
+		lineageTag: 57d78759-99fa-5d26-82aa-5939a5cfe485
+		summarizeBy: none
+		sourceColumn: "Standart Maliyet"
+
+	partition 'DimUrun' = m
+		mode: import
+		source =
+				let
+				    Kaynak = Csv.Document(File.Contents(VeriKlasoru & "DimUrun.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Basliklar = Table.PromoteHeaders(Kaynak, [PromoteAllScalars = true]),
+				    Tipler = Table.TransformColumnTypes(Basliklar, {{"UrunID", type text}, {"Ürün Kodu", type text}, {"Ürün", type text}, {"Ürün Ailesi", type text}, {"Hat", type text}, {"Birim Fiyat", type number}, {"Standart Maliyet", type number}}, "en-US")
+				in
+				    Tipler
+
+	annotation PBI_ResultType = Table

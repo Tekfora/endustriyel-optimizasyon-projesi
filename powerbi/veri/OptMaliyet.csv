@@ -1,0 +1,21 @@
+Durum,Kalem,Tutar TL
+A: Mevcut planlama · mevcut verim,Fazla mesai,2288000.0
+A: Mevcut planlama · mevcut verim,Gecikme (ceza + ekspres),1961689.0
+A: Mevcut planlama · mevcut verim,Stok taşıma,26314.0
+A: Mevcut planlama · mevcut verim,Ürün değişimi (ayar),559867.0
+A: Mevcut planlama · mevcut verim,Emniyet stoğu açığı,97748.0
+B: Optimal plan · mevcut verim,Fazla mesai,1196000.0
+B: Optimal plan · mevcut verim,Gecikme (ceza + ekspres),7324.0
+B: Optimal plan · mevcut verim,Stok taşıma,109860.0
+B: Optimal plan · mevcut verim,Ürün değişimi (ayar),227500.0
+B: Optimal plan · mevcut verim,Emniyet stoğu açığı,38571.0
+C: Mevcut planlama · pilot verimi,Fazla mesai,1144000.0
+C: Mevcut planlama · pilot verimi,Gecikme (ceza + ekspres),0.0
+C: Mevcut planlama · pilot verimi,Stok taşıma,72410.0
+C: Mevcut planlama · pilot verimi,Ürün değişimi (ayar),586993.0
+C: Mevcut planlama · pilot verimi,Emniyet stoğu açığı,0.0
+D: Optimal plan · pilot verimi,Fazla mesai,0.0
+D: Optimal plan · pilot verimi,Gecikme (ceza + ekspres),0.0
+D: Optimal plan · pilot verimi,Stok taşıma,87207.0
+D: Optimal plan · pilot verimi,Ürün değişimi (ayar),237500.0
+D: Optimal plan · pilot verimi,Emniyet stoğu açığı,24801.0

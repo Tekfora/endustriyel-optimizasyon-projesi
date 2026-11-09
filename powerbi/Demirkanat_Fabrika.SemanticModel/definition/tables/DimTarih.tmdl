@@ -1,0 +1,107 @@
+table 'DimTarih'
+	dataCategory: Time
+	lineageTag: ca710639-1bc0-53f9-ba90-1c06f4f535e3
+
+	column 'Tarih'
+		dataType: dateTime
+		isKey
+		formatString: dd.mm.yyyy
+		lineageTag: 7aad0d5f-d85f-5332-ad49-ec5de7d39164
+		summarizeBy: none
+		sourceColumn: "Tarih"
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Yıl'
+		dataType: int64
+		formatString: #,0
+		lineageTag: 08a22fda-568b-5247-a2da-250e58e8b1c5
+		summarizeBy: none
+		sourceColumn: "Yıl"
+
+	column 'AyNo'
+		dataType: int64
+		isHidden
+		formatString: #,0
+		lineageTag: a9fd11db-c491-5f05-9fc3-f9932ab3facd
+		summarizeBy: none
+		sourceColumn: "AyNo"
+
+	column 'Ay'
+		dataType: string
+		lineageTag: 433b13d8-64fa-5f9a-9cab-ff26851b49e3
+		summarizeBy: none
+		sourceColumn: "Ay"
+		sortByColumn: 'AyNo'
+
+	column 'YılAyNo'
+		dataType: int64
+		isHidden
+		formatString: #,0
+		lineageTag: fc290001-4258-56f3-ab3f-a54700ed3055
+		summarizeBy: none
+		sourceColumn: "YılAyNo"
+
+	column 'Yıl-Ay'
+		dataType: string
+		lineageTag: 31148c2f-478a-5c01-bc54-cc62795b78c7
+		summarizeBy: none
+		sourceColumn: "Yıl-Ay"
+		sortByColumn: 'YılAyNo'
+
+	column 'Hafta Başı'
+		dataType: dateTime
+		formatString: dd.mm.yyyy
+		lineageTag: 46e48a88-b150-554d-9c8e-a6fa4fb731cd
+		summarizeBy: none
+		sourceColumn: "Hafta Başı"
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'GünNo'
+		dataType: int64
+		isHidden
+		formatString: #,0
+		lineageTag: 2033e228-6d04-55cb-b250-2f59ccf349ff
+		summarizeBy: none
+		sourceColumn: "GünNo"
+
+	column 'Gün'
+		dataType: string
+		lineageTag: bee695c7-feab-55e9-a7df-e387d120485d
+		summarizeBy: none
+		sourceColumn: "Gün"
+		sortByColumn: 'GünNo'
+
+	column 'Çalışma Günü'
+		dataType: string
+		lineageTag: 7118f01a-0a0c-5944-bbdf-f66faa41c9a0
+		summarizeBy: none
+		sourceColumn: "Çalışma Günü"
+
+	column 'DönemNo'
+		dataType: int64
+		isHidden
+		formatString: #,0
+		lineageTag: d283a17a-4ba7-5da6-aee4-399db40ffd14
+		summarizeBy: none
+		sourceColumn: "DönemNo"
+
+	column 'Dönem'
+		dataType: string
+		lineageTag: 08862953-d65c-5df4-a256-a03f32198ba9
+		summarizeBy: none
+		sourceColumn: "Dönem"
+		sortByColumn: 'DönemNo'
+
+	partition 'DimTarih' = m
+		mode: import
+		source =
+				let
+				    Kaynak = Csv.Document(File.Contents(VeriKlasoru & "DimTarih.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Basliklar = Table.PromoteHeaders(Kaynak, [PromoteAllScalars = true]),
+				    Tipler = Table.TransformColumnTypes(Basliklar, {{"Tarih", type date}, {"Yıl", Int64.Type}, {"AyNo", Int64.Type}, {"Ay", type text}, {"YılAyNo", Int64.Type}, {"Yıl-Ay", type text}, {"Hafta Başı", type date}, {"GünNo", Int64.Type}, {"Gün", type text}, {"Çalışma Günü", type text}, {"DönemNo", Int64.Type}, {"Dönem", type text}}, "en-US")
+				in
+				    Tipler
+
+	annotation PBI_ResultType = Table

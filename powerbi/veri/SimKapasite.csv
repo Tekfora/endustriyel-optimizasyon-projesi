@@ -1,0 +1,8 @@
+Senaryo,Senaryo Adı,Haftalık Çıktı,GA Yarı Genişlik,Kapasite Artışı,FRZ OEE,Darboğaz,Tedarik Süresi (gün),Talebi Karşılıyor
+S0,S0 · Mevcut durum,7813,58,0.0,0.5998,Freze,6.67,Hayır
+S1,S1 · SMED (hızlı ürün değişimi),8370,66,0.0713,0.642,Freze,4.24,Hayır
+S2,S2 · TPM (önleyici bakım),8185,50,0.0476,0.6315,Freze,4.47,Hayır
+S3,S3 · SMED + TPM,8777,77,0.1234,0.6765,Freze,2.76,Evet
+S4,S4 · SMED + TPM + kampanya planlama,8978,42,0.1491,0.6861,Freze,4.22,Evet
+S5,S5 · Yeni işleme merkezi (FRZ-2),10535,52,0.3484,0.4047,Taşlama,1.23,Evet
+S6,S6 · SMED + TPM yalnızca Taşlama'da,7819,59,0.0007,0.6007,Freze,6.52,Hayır

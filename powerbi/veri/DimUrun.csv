@@ -1,0 +1,7 @@
+UrunID,Ürün Kodu,Ürün,Ürün Ailesi,Hat,Birim Fiyat,Standart Maliyet
+P01,AM-200,Aks Mili Ø25,Aks Mili,Hat-1,420,300
+P02,AM-250,Aks Mili Ø30,Aks Mili,Hat-1,520,370
+P03,RB-110,Rot Başı Standart,Rot Başı,Hat-1,260,180
+P04,RB-140,Rot Başı Ağır Hizmet,Rot Başı,Hat-1,340,240
+P05,FD-280,Fren Diski Ø280,Fren Diski,Hat-2,610,450
+P06,FD-320,Fren Diski Ø320,Fren Diski,Hat-2,780,570

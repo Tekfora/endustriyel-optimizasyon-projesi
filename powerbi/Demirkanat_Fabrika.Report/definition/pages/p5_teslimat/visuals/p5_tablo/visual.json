@@ -1,0 +1,162 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.4.0/schema.json",
+  "name": "p5_tablo",
+  "position": {
+    "x": 20,
+    "y": 476,
+    "z": 10000,
+    "height": 232,
+    "width": 1240,
+    "tabOrder": 10000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FaktSiparis"
+                    }
+                  },
+                  "Property": "SiparisNo"
+                }
+              },
+              "queryRef": "FaktSiparis.SiparisNo",
+              "nativeQueryRef": "SiparisNo"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DimMusteri"
+                    }
+                  },
+                  "Property": "Müşteri"
+                }
+              },
+              "queryRef": "DimMusteri.Müşteri",
+              "nativeQueryRef": "Müşteri"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DimUrun"
+                    }
+                  },
+                  "Property": "Ürün Kodu"
+                }
+              },
+              "queryRef": "DimUrun.Ürün Kodu",
+              "nativeQueryRef": "Ürün Kodu"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FaktSiparis"
+                    }
+                  },
+                  "Property": "TerminTarihi"
+                }
+              },
+              "queryRef": "FaktSiparis.TerminTarihi",
+              "nativeQueryRef": "TerminTarihi"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FaktSiparis"
+                    }
+                  },
+                  "Property": "SevkTarihi"
+                }
+              },
+              "queryRef": "FaktSiparis.SevkTarihi",
+              "nativeQueryRef": "SevkTarihi"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FaktSiparis"
+                    }
+                  },
+                  "Property": "GecikmeGun"
+                }
+              },
+              "queryRef": "FaktSiparis.GecikmeGun",
+              "nativeQueryRef": "GecikmeGun"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FaktSiparis"
+                    }
+                  },
+                  "Property": "Durum"
+                }
+              },
+              "queryRef": "FaktSiparis.Durum",
+              "nativeQueryRef": "Durum"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "FaktSiparis"
+                  }
+                },
+                "Property": "GecikmeGun"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Siparişler · en çok gecikenden başlayarak'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

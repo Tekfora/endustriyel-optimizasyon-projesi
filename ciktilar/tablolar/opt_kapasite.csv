@@ -1,0 +1,25 @@
+Durum,Ay,FazlaMesaiVardiya,FRZYuk
+A: Mevcut planlama · mevcut verim,2026-11-01,10.0,1.054
+A: Mevcut planlama · mevcut verim,2026-12-01,8.0,1.012470125920286
+A: Mevcut planlama · mevcut verim,2027-01-01,2.0,0.9468094985450811
+A: Mevcut planlama · mevcut verim,2027-02-01,8.0,1.0333333333333337
+A: Mevcut planlama · mevcut verim,2027-03-01,8.0,1.0333333333333337
+A: Mevcut planlama · mevcut verim,2027-04-01,8.0,1.0292000000000001
+B: Optimal plan · mevcut verim,2026-11-01,10.0,1.0539999861212574
+B: Optimal plan · mevcut verim,2026-12-01,0.0,0.9300000117478473
+B: Optimal plan · mevcut verim,2027-01-01,0.0,0.9299999986128028
+B: Optimal plan · mevcut verim,2027-02-01,1.0,0.9429166668317648
+B: Optimal plan · mevcut verim,2027-03-01,8.0,1.0333333292458375
+B: Optimal plan · mevcut verim,2027-04-01,4.0,0.9795999995728198
+C: Mevcut planlama · pilot verimi,2026-11-01,5.0,0.9839833631689567
+C: Mevcut planlama · pilot verimi,2026-12-01,0.0,0.834815562979149
+C: Mevcut planlama · pilot verimi,2027-01-01,0.0,0.8311633153454112
+C: Mevcut planlama · pilot verimi,2027-02-01,3.0,0.9582771214913042
+C: Mevcut planlama · pilot verimi,2027-03-01,8.0,1.030942820596549
+C: Mevcut planlama · pilot verimi,2027-04-01,6.0,0.9950728282432242
+D: Optimal plan · pilot verimi,2026-11-01,0.0,0.9300000000799878
+D: Optimal plan · pilot verimi,2026-12-01,0.0,0.826712750871212
+D: Optimal plan · pilot verimi,2027-01-01,0.0,0.8758251634654068
+D: Optimal plan · pilot verimi,2027-02-01,0.0,0.9300000028661438
+D: Optimal plan · pilot verimi,2027-03-01,0.0,0.9299999997358389
+D: Optimal plan · pilot verimi,2027-04-01,0.0,0.9300000042661634

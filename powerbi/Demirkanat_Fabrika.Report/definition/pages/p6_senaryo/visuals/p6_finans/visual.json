@@ -1,0 +1,130 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.4.0/schema.json",
+  "name": "p6_finans",
+  "position": {
+    "x": 660,
+    "y": 394,
+    "z": 5000,
+    "height": 314,
+    "width": 600,
+    "tabOrder": 5000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FinansOzet"
+                    }
+                  },
+                  "Property": "Seçenek"
+                }
+              },
+              "queryRef": "FinansOzet.Seçenek",
+              "nativeQueryRef": "Seçenek"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FinansOzet"
+                    }
+                  },
+                  "Property": "NPV P10 (M TL)"
+                }
+              },
+              "queryRef": "FinansOzet.NPV P10 (M TL)",
+              "nativeQueryRef": "NPV P10 (M TL)"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FinansOzet"
+                    }
+                  },
+                  "Property": "NPV Medyan (M TL)"
+                }
+              },
+              "queryRef": "FinansOzet.NPV Medyan (M TL)",
+              "nativeQueryRef": "NPV Medyan (M TL)"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FinansOzet"
+                    }
+                  },
+                  "Property": "NPV P90 (M TL)"
+                }
+              },
+              "queryRef": "FinansOzet.NPV P90 (M TL)",
+              "nativeQueryRef": "NPV P90 (M TL)"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FinansOzet"
+                    }
+                  },
+                  "Property": "Pozitif NPV Olasılığı"
+                }
+              },
+              "queryRef": "FinansOzet.Pozitif NPV Olasılığı",
+              "nativeQueryRef": "Pozitif NPV Olasılığı"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FinansOzet"
+                    }
+                  },
+                  "Property": "En İyi Seçenek Olasılığı"
+                }
+              },
+              "queryRef": "FinansOzet.En İyi Seçenek Olasılığı",
+              "nativeQueryRef": "En İyi Seçenek Olasılığı"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Monte Carlo: 5 yıllık NPV (milyon TL, N = 10.000)'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

@@ -1,0 +1,97 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.4.0/schema.json",
+  "name": "p6_opt",
+  "position": {
+    "x": 20,
+    "y": 394,
+    "z": 4000,
+    "height": 314,
+    "width": 620,
+    "tabOrder": 4000
+  },
+  "visual": {
+    "visualType": "columnChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "OptMaliyet"
+                    }
+                  },
+                  "Property": "Durum"
+                }
+              },
+              "queryRef": "OptMaliyet.Durum",
+              "nativeQueryRef": "Durum",
+              "active": true
+            }
+          ]
+        },
+        "Series": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "OptMaliyet"
+                    }
+                  },
+                  "Property": "Kalem"
+                }
+              },
+              "queryRef": "OptMaliyet.Kalem",
+              "nativeQueryRef": "Kalem"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Ölçüler"
+                    }
+                  },
+                  "Property": "Opt Maliyet (TL)"
+                }
+              },
+              "queryRef": "_Ölçüler.Opt Maliyet (TL)",
+              "nativeQueryRef": "Opt Maliyet (TL)"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Optimizasyon: 6 aylık plan maliyeti (TL)'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

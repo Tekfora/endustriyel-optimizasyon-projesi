@@ -1,0 +1,12 @@
+# Python 3.11+ (3.13.7 ile test edildi)
+numpy>=2.1
+pandas>=2.2.3
+matplotlib>=3.9
+scipy>=1.14
+statsmodels>=0.14.4
+simpy>=4.1
+# PuLP 2.9: klasik API (LpVariable, lpSum) + Windows için gömülü CBC çözücü.
+# PuLP 3+/4+ sürümleri API'yi değiştirdi ve CBC'yi artık içermiyor.
+pulp==2.9.0
+openpyxl>=3.1
+pymupdf>=1.24

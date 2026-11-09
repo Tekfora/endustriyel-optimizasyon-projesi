@@ -1,0 +1,74 @@
+table 'SimKapasite'
+	lineageTag: e0ab59e3-db9a-58a0-a63a-7c368d79f319
+
+	column 'Senaryo'
+		dataType: string
+		lineageTag: 478f8a49-e5f3-52bf-a17d-29466a46edfc
+		summarizeBy: none
+		sourceColumn: "Senaryo"
+
+	column 'Senaryo Adı'
+		dataType: string
+		lineageTag: e32dbe15-e90f-5ea1-80e9-1013968cd832
+		summarizeBy: none
+		sourceColumn: "Senaryo Adı"
+		sortByColumn: 'Senaryo'
+
+	column 'Haftalık Çıktı'
+		dataType: double
+		formatString: #,0
+		lineageTag: 55bc15d3-a40b-59f3-972d-97556a492564
+		summarizeBy: none
+		sourceColumn: "Haftalık Çıktı"
+
+	column 'GA Yarı Genişlik'
+		dataType: double
+		formatString: #,0
+		lineageTag: 7d99de00-5ad3-503d-b1aa-83ef032e5e10
+		summarizeBy: none
+		sourceColumn: "GA Yarı Genişlik"
+
+	column 'Kapasite Artışı'
+		dataType: double
+		formatString: +0%;-0%;0%
+		lineageTag: be0f6779-b92f-5f33-87e5-8fd130f1887c
+		summarizeBy: none
+		sourceColumn: "Kapasite Artışı"
+
+	column 'FRZ OEE'
+		dataType: double
+		formatString: 0.0%
+		lineageTag: 4e5eedd6-6b80-5d39-9f50-0c88db6d0bdc
+		summarizeBy: none
+		sourceColumn: "FRZ OEE"
+
+	column 'Darboğaz'
+		dataType: string
+		lineageTag: 3a92dcfe-9a21-5daa-b8e3-eb9338403aa7
+		summarizeBy: none
+		sourceColumn: "Darboğaz"
+
+	column 'Tedarik Süresi (gün)'
+		dataType: double
+		formatString: 0.0
+		lineageTag: ec95060b-acb4-5074-8832-53417275b20a
+		summarizeBy: none
+		sourceColumn: "Tedarik Süresi (gün)"
+
+	column 'Talebi Karşılıyor'
+		dataType: string
+		lineageTag: 9e96d72e-b056-502a-bb10-74f2fa14bf84
+		summarizeBy: none
+		sourceColumn: "Talebi Karşılıyor"
+
+	partition 'SimKapasite' = m
+		mode: import
+		source =
+				let
+				    Kaynak = Csv.Document(File.Contents(VeriKlasoru & "SimKapasite.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Basliklar = Table.PromoteHeaders(Kaynak, [PromoteAllScalars = true]),
+				    Tipler = Table.TransformColumnTypes(Basliklar, {{"Senaryo", type text}, {"Senaryo Adı", type text}, {"Haftalık Çıktı", type number}, {"GA Yarı Genişlik", type number}, {"Kapasite Artışı", type number}, {"FRZ OEE", type number}, {"Darboğaz", type text}, {"Tedarik Süresi (gün)", type number}, {"Talebi Karşılıyor", type text}}, "en-US")
+				in
+				    Tipler
+
+	annotation PBI_ResultType = Table

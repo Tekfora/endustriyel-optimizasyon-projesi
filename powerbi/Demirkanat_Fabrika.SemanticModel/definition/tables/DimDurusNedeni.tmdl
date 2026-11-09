@@ -1,0 +1,39 @@
+table 'DimDurusNedeni'
+	lineageTag: 57ca06aa-420d-509e-a845-49f0a6ae038e
+
+	column 'NedenID'
+		dataType: string
+		isHidden
+		lineageTag: b82d86bc-b694-55c5-8a5b-0068da6093e8
+		summarizeBy: none
+		sourceColumn: "NedenID"
+
+	column 'Neden'
+		dataType: string
+		lineageTag: d7f2b159-a403-57b3-8366-b460ff4ba499
+		summarizeBy: none
+		sourceColumn: "Neden"
+
+	column 'Kategori'
+		dataType: string
+		lineageTag: d4c4f8ac-9e32-5302-9e19-eb9af505347b
+		summarizeBy: none
+		sourceColumn: "Kategori"
+
+	column 'Planlı mı'
+		dataType: string
+		lineageTag: bbeb49f7-5c6b-5be4-8710-61cde685ed4c
+		summarizeBy: none
+		sourceColumn: "Planlı mı"
+
+	partition 'DimDurusNedeni' = m
+		mode: import
+		source =
+				let
+				    Kaynak = Csv.Document(File.Contents(VeriKlasoru & "DimDurusNedeni.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Basliklar = Table.PromoteHeaders(Kaynak, [PromoteAllScalars = true]),
+				    Tipler = Table.TransformColumnTypes(Basliklar, {{"NedenID", type text}, {"Neden", type text}, {"Kategori", type text}, {"Planlı mı", type text}}, "en-US")
+				in
+				    Tipler
+
+	annotation PBI_ResultType = Table

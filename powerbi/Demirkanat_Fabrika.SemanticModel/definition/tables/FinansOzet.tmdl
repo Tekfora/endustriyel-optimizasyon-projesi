@@ -1,0 +1,55 @@
+table 'FinansOzet'
+	lineageTag: ca34c88a-991f-53a0-b2ec-b91bc3a1ee42
+
+	column 'Seçenek'
+		dataType: string
+		lineageTag: 0a252fd7-1829-56d9-ae31-4fe346639071
+		summarizeBy: none
+		sourceColumn: "Seçenek"
+
+	column 'NPV P10 (M TL)'
+		dataType: double
+		formatString: 0.0
+		lineageTag: 73de9e92-16ce-5e0f-a49a-164384cb81bd
+		summarizeBy: none
+		sourceColumn: "NPV P10 (M TL)"
+
+	column 'NPV Medyan (M TL)'
+		dataType: double
+		formatString: 0.0
+		lineageTag: 9981c350-5a48-5b50-bbe1-c80350679b7a
+		summarizeBy: none
+		sourceColumn: "NPV Medyan (M TL)"
+
+	column 'NPV P90 (M TL)'
+		dataType: double
+		formatString: 0.0
+		lineageTag: 693ecd74-b770-53e6-97b9-f7318616b156
+		summarizeBy: none
+		sourceColumn: "NPV P90 (M TL)"
+
+	column 'Pozitif NPV Olasılığı'
+		dataType: double
+		formatString: 0%
+		lineageTag: fed85d05-e75a-54e4-83cd-318ed708a802
+		summarizeBy: none
+		sourceColumn: "Pozitif NPV Olasılığı"
+
+	column 'En İyi Seçenek Olasılığı'
+		dataType: double
+		formatString: 0%
+		lineageTag: 1295a599-d977-5aa5-9cfd-6c8b74e57afd
+		summarizeBy: none
+		sourceColumn: "En İyi Seçenek Olasılığı"
+
+	partition 'FinansOzet' = m
+		mode: import
+		source =
+				let
+				    Kaynak = Csv.Document(File.Contents(VeriKlasoru & "FinansOzet.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Basliklar = Table.PromoteHeaders(Kaynak, [PromoteAllScalars = true]),
+				    Tipler = Table.TransformColumnTypes(Basliklar, {{"Seçenek", type text}, {"NPV P10 (M TL)", type number}, {"NPV Medyan (M TL)", type number}, {"NPV P90 (M TL)", type number}, {"Pozitif NPV Olasılığı", type number}, {"En İyi Seçenek Olasılığı", type number}}, "en-US")
+				in
+				    Tipler
+
+	annotation PBI_ResultType = Table

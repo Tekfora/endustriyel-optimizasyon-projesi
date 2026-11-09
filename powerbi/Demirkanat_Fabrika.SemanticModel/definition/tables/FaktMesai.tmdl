@@ -1,0 +1,55 @@
+table 'FaktMesai'
+	lineageTag: 65f31ecd-f8bc-58b9-a181-14d70bfe5405
+
+	column 'Tarih'
+		dataType: dateTime
+		isHidden
+		formatString: dd.mm.yyyy
+		lineageTag: c7bd6fbf-645a-5513-8a8c-f32b55051ba0
+		summarizeBy: none
+		sourceColumn: "Tarih"
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Hat'
+		dataType: string
+		isHidden
+		lineageTag: 4e6ae05e-942b-5a70-887a-0680e7dcfeec
+		summarizeBy: none
+		sourceColumn: "Hat"
+
+	column 'VardiyaSayisi'
+		dataType: int64
+		isHidden
+		formatString: #,0
+		lineageTag: 9c5f56eb-8c35-58b7-ac5f-639ce6641664
+		summarizeBy: none
+		sourceColumn: "VardiyaSayisi"
+
+	column 'Saat'
+		dataType: double
+		isHidden
+		formatString: #,0.00
+		lineageTag: c9843416-9d7a-58ca-af47-30b948627591
+		summarizeBy: none
+		sourceColumn: "Saat"
+
+	column 'MaliyetTL'
+		dataType: double
+		isHidden
+		formatString: #,0.00
+		lineageTag: e71f7e91-5edb-5492-9a38-611606c8cd13
+		summarizeBy: none
+		sourceColumn: "MaliyetTL"
+
+	partition 'FaktMesai' = m
+		mode: import
+		source =
+				let
+				    Kaynak = Csv.Document(File.Contents(VeriKlasoru & "FaktMesai.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Basliklar = Table.PromoteHeaders(Kaynak, [PromoteAllScalars = true]),
+				    Tipler = Table.TransformColumnTypes(Basliklar, {{"Tarih", type date}, {"Hat", type text}, {"VardiyaSayisi", Int64.Type}, {"Saat", type number}, {"MaliyetTL", type number}}, "en-US")
+				in
+				    Tipler
+
+	annotation PBI_ResultType = Table

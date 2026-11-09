@@ -1,0 +1,10 @@
+NedenID,Neden,Kategori,Planlı mı
+D01,Ürün değişimi (setup),Ayar & Değişim,Hayır
+D02,İlk parça onayı / ayar,Ayar & Değişim,Hayır
+D03,Mekanik arıza,Arıza,Hayır
+D04,Elektrik/elektronik arıza,Arıza,Hayır
+D05,Takım kırılması / uç değişimi,Takım,Hayır
+D06,Malzeme bekleme,Lojistik,Hayır
+D07,Operatör yok / geç başlama,Organizasyon,Hayır
+D08,Kalite problemi / ölçüm,Kalite,Hayır
+D09,Planlı bakım,Planlı,Evet

@@ -1,0 +1,33 @@
+table 'DimHataTuru'
+	lineageTag: ea684c18-4504-5757-949e-800b4cfadb39
+
+	column 'HataID'
+		dataType: string
+		isHidden
+		lineageTag: 95b8d33a-9299-5fd9-a3d2-31b676180fa4
+		summarizeBy: none
+		sourceColumn: "HataID"
+
+	column 'Hata Türü'
+		dataType: string
+		lineageTag: acac6aba-5ed4-5492-a443-c1698be77104
+		summarizeBy: none
+		sourceColumn: "Hata Türü"
+
+	column 'Hata Grubu'
+		dataType: string
+		lineageTag: 5fdd7822-ea65-5d87-a0a9-85847c21f1ec
+		summarizeBy: none
+		sourceColumn: "Hata Grubu"
+
+	partition 'DimHataTuru' = m
+		mode: import
+		source =
+				let
+				    Kaynak = Csv.Document(File.Contents(VeriKlasoru & "DimHataTuru.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Basliklar = Table.PromoteHeaders(Kaynak, [PromoteAllScalars = true]),
+				    Tipler = Table.TransformColumnTypes(Basliklar, {{"HataID", type text}, {"Hata Türü", type text}, {"Hata Grubu", type text}}, "en-US")
+				in
+				    Tipler
+
+	annotation PBI_ResultType = Table

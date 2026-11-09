@@ -1,0 +1,97 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.4.0/schema.json",
+  "name": "p3_trend",
+  "position": {
+    "x": 20,
+    "y": 424,
+    "z": 5000,
+    "height": 284,
+    "width": 1240,
+    "tabOrder": 5000
+  },
+  "visual": {
+    "visualType": "columnChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DimTarih"
+                    }
+                  },
+                  "Property": "Yıl-Ay"
+                }
+              },
+              "queryRef": "DimTarih.Yıl-Ay",
+              "nativeQueryRef": "Yıl-Ay",
+              "active": true
+            }
+          ]
+        },
+        "Series": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DimDurusNedeni"
+                    }
+                  },
+                  "Property": "Kategori"
+                }
+              },
+              "queryRef": "DimDurusNedeni.Kategori",
+              "nativeQueryRef": "Kategori"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Ölçüler"
+                    }
+                  },
+                  "Property": "Plansız Duruş (saat)"
+                }
+              },
+              "queryRef": "_Ölçüler.Plansız Duruş (saat)",
+              "nativeQueryRef": "Plansız Duruş (saat)"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Aylık plansız duruş (saat), kategori'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

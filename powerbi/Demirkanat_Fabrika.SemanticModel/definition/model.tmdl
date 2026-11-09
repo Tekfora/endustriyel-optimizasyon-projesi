@@ -1,0 +1,34 @@
+model Model
+	culture: tr-TR
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	discourageImplicitMeasures
+	sourceQueryCulture: tr-TR
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["VeriKlasoru", "_Ölçüler", "DimTarih", "DimMakine", "DimUrun", "DimMusteri", "DimVardiya", "DimDurusNedeni", "DimHataTuru", "FaktUretim", "FaktDurus", "FaktKalite", "FaktSiparis", "FaktOlcum", "FaktMesai", "FaktTalep", "SimKapasite", "SimKullanim", "OptPlan", "OptMaliyet", "FinansOzet", "FinansNPV"]
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+ref table '_Ölçüler'
+ref table 'DimTarih'
+ref table 'DimMakine'
+ref table 'DimUrun'
+ref table 'DimMusteri'
+ref table 'DimVardiya'
+ref table 'DimDurusNedeni'
+ref table 'DimHataTuru'
+ref table 'FaktUretim'
+ref table 'FaktDurus'
+ref table 'FaktKalite'
+ref table 'FaktSiparis'
+ref table 'FaktOlcum'
+ref table 'FaktMesai'
+ref table 'FaktTalep'
+ref table 'SimKapasite'
+ref table 'SimKullanim'
+ref table 'OptPlan'
+ref table 'OptMaliyet'
+ref table 'FinansOzet'
+ref table 'FinansNPV'

@@ -1,0 +1,36 @@
+Senaryo,İstasyon,İstasyon Sırası,Kullanım
+S0,Kesim,1,0.557
+S0,Torna,2,0.618
+S0,Freze,3,1.0
+S0,Isıl işlem,4,0.65
+S0,Taşlama,5,0.737
+S1,Kesim,1,0.596
+S1,Torna,2,0.659
+S1,Freze,3,1.0
+S1,Isıl işlem,4,0.696
+S1,Taşlama,5,0.787
+S2,Kesim,1,0.586
+S2,Torna,2,0.649
+S2,Freze,3,1.0
+S2,Isıl işlem,4,0.683
+S2,Taşlama,5,0.773
+S3,Kesim,1,0.627
+S3,Torna,2,0.694
+S3,Freze,3,1.0
+S3,Isıl işlem,4,0.73
+S3,Taşlama,5,0.829
+S4,Kesim,1,0.632
+S4,Torna,2,0.692
+S4,Freze,3,1.0
+S4,Isıl işlem,4,0.736
+S4,Taşlama,5,0.824
+S5,Kesim,1,0.751
+S5,Torna,2,0.832
+S5,Freze,3,0.737
+S5,Isıl işlem,4,0.885
+S5,Taşlama,5,1.0
+S6,Kesim,1,0.558
+S6,Torna,2,0.616
+S6,Freze,3,1.0
+S6,Isıl işlem,4,0.65
+S6,Taşlama,5,0.694

@@ -1,0 +1,10 @@
+HataID,Hata Türü,Hata Grubu
+Q01,Ölçü dışı (çap/boy),Boyutsal
+Q02,Çapak,Yüzey
+Q03,Yüzey hatası (çizik/darbe),Yüzey
+Q04,Sertlik değeri dışı,Malzeme/Isıl
+Q05,Çatlak,Malzeme/Isıl
+Q06,Salgı / yuvarlaklık,Boyutsal
+Q07,Döküm boşluğu,Malzeme/Isıl
+Q08,Delik pozisyon hatası,Boyutsal
+Q09,Balans dışı,Fonksiyonel

@@ -1,0 +1,347 @@
+table '_Ölçüler'
+	lineageTag: 1d736898-1c4a-5169-921f-b2ee00308306
+
+	/// OEE'ye giren planlı üretim süresi (iş yüklenen süre, planlı bakım hariç).
+	measure 'Planlanan Süre (saat)' = DIVIDE ( SUM ( FaktUretim[PlanlananSureDk] ), 60 )
+		formatString: #,0
+		displayFolder: 1 OEE
+		lineageTag: bdb996a0-b635-5c73-8154-5107aa4a9902
+
+	/// Makinenin fiilen parça işlediği süre.
+	measure 'Çalışma Süresi (saat)' = DIVIDE ( SUM ( FaktUretim[CalismaSuresiDk] ), 60 )
+		formatString: #,0
+		displayFolder: 1 OEE
+		lineageTag: 4a6b9142-f1fa-53db-864c-82140824f9f3
+
+	/// Çalışma süresi / planlanan süre.
+	measure 'Kullanılabilirlik' = DIVIDE ( SUM ( FaktUretim[CalismaSuresiDk] ), SUM ( FaktUretim[PlanlananSureDk] ) )
+		formatString: 0.0%
+		displayFolder: 1 OEE
+		lineageTag: 9db85397-952d-520d-a220-ed0f76748b3f
+
+	/// İdeal çevrim süresiyle gereken süre / çalışma süresi (hız kaybı ve küçük duruşlar).
+	measure 'Performans' = DIVIDE ( SUM ( FaktUretim[IdealSureDk] ), SUM ( FaktUretim[CalismaSuresiDk] ) )
+		formatString: 0.0%
+		displayFolder: 1 OEE
+		lineageTag: 0fb2d879-57a7-5470-8102-bd24e41256ad
+
+	/// Sağlam adet / üretilen adet.
+	measure 'Kalite' = DIVIDE ( SUM ( FaktUretim[SaglamAdet] ), SUM ( FaktUretim[UretilenAdet] ) )
+		formatString: 0.0%
+		displayFolder: 1 OEE
+		lineageTag: 752cf4ed-2a75-5b0d-a12c-759e8f1f86e9
+
+	/// Toplam Ekipman Etkinliği = Kullanılabilirlik × Performans × Kalite.
+	measure 'OEE' = [Kullanılabilirlik] * [Performans] * [Kalite]
+		formatString: 0.0%
+		displayFolder: 1 OEE
+		lineageTag: cafd167b-de76-5cc7-974d-a066e8c9ccbd
+
+	/// Şirket hedefi; yalnızca OEE verisi olan dönemlerde gösterilir.
+	measure 'OEE Hedef' = IF ( NOT ISBLANK ( [OEE] ), 0.75 )
+		formatString: 0%
+		displayFolder: 1 OEE
+		lineageTag: 5d04e9aa-b6f0-5d72-ac67-07015cd9961d
+
+	measure 'OEE Hedefe Fark' = IF ( NOT ISBLANK ( [OEE] ), [OEE] - [OEE Hedef] )
+		formatString: +0.0%;-0.0%;0.0%
+		displayFolder: 1 OEE
+		lineageTag: a689a47b-dbd3-5c78-822b-5e40548d27f7
+
+	/// Durum rengi: hedef üstü / yakın / altı.
+	measure 'OEE Renk' = SWITCH ( TRUE (), ISBLANK ( [OEE] ), BLANK (), [OEE] >= 0.75, "#0CA30C", [OEE] >= 0.65, "#FAB219", "#D03B3B" )
+		displayFolder: 1 OEE
+		lineageTag: a806dc13-11fa-529e-9d21-18b90c2c68a1
+
+	/// Matris hücre zemini için açık durum rengi.
+	measure 'OEE Zemin' = SWITCH ( TRUE (), ISBLANK ( [OEE] ), BLANK (), [OEE] >= 0.75, "#DDF2DD", [OEE] >= 0.65, "#FDEFCF", "#F6D8D8" )
+		displayFolder: 1 OEE
+		lineageTag: 524fbbb5-cf88-534e-a351-3fe86e9cf5be
+
+	/// İş yüklenen süre / vardiya takvimi. Darboğazda %100'e yakındır.
+	measure 'Kapasite Kullanımı' = DIVIDE ( SUM ( FaktUretim[PlanlananSureDk] ), SUM ( FaktUretim[TakvimSuresiDk] ) )
+		formatString: 0%
+		displayFolder: 1 OEE
+		lineageTag: a645ef25-d5b3-5c47-8256-8a8c35ad0c31
+
+	measure 'OEE Önceki Ay' = CALCULATE ( [OEE], DATEADD ( DimTarih[Tarih], -1, MONTH ) )
+		formatString: 0.0%
+		displayFolder: 1 OEE
+		lineageTag: 4500718f-e12d-5862-926e-12da52666aa7
+
+	measure 'OEE Aylık Değişim (puan)' = IF ( NOT ISBLANK ( [OEE Önceki Ay] ), ( [OEE] - [OEE Önceki Ay] ) * 100 )
+		formatString: +0.0;-0.0;0.0
+		displayFolder: 1 OEE
+		lineageTag: 28a0d186-d00c-57b1-9bc6-d34ed4a6fab1
+
+	measure 'Üretilen Adet' = SUM ( FaktUretim[UretilenAdet] )
+		formatString: #,0
+		displayFolder: 2 Üretim ve Kalite
+		lineageTag: a9a18a25-43e0-5d35-abd4-fafb90beb925
+
+	measure 'Sağlam Adet' = SUM ( FaktUretim[SaglamAdet] )
+		formatString: #,0
+		displayFolder: 2 Üretim ve Kalite
+		lineageTag: 2cc4528a-b9d5-5379-9e60-5f0b5acfa82d
+
+	measure 'Hurda Adet' = SUM ( FaktUretim[HurdaAdet] )
+		formatString: #,0
+		displayFolder: 2 Üretim ve Kalite
+		lineageTag: d1b17cb8-a925-53d2-908c-45179c21e32a
+
+	measure 'Hurda Oranı' = DIVIDE ( [Hurda Adet], [Üretilen Adet] )
+		formatString: 0.00%
+		displayFolder: 2 Üretim ve Kalite
+		lineageTag: aba068a0-dd7e-50fb-892a-270ab5dd6cfc
+
+	/// Hurda adedi × standart maliyet × operasyondaki birikmiş maliyet oranı.
+	measure 'Hurda Maliyeti (TL)' = SUM ( FaktUretim[HurdaMaliyetiTL] )
+		formatString: #,0
+		displayFolder: 2 Üretim ve Kalite
+		lineageTag: ad0cf77e-ce15-5d01-b0d6-c6427b27b02f
+
+	/// Son istasyondan çıkan sağlam ürün.
+	measure 'Hat Çıkışı (adet)' = CALCULATE ( [Sağlam Adet], DimMakine[Son İstasyon] = 1 )
+		formatString: #,0
+		displayFolder: 2 Üretim ve Kalite
+		lineageTag: e0b3ca32-83d7-56b5-a892-b05acae93f8e
+
+	measure 'Hata Adedi' = SUM ( FaktKalite[Adet] )
+		formatString: #,0
+		displayFolder: 2 Üretim ve Kalite
+		lineageTag: 06ece934-197d-5116-81c6-31809a344539
+
+	measure 'Hata Payı' = DIVIDE ( [Hata Adedi], CALCULATE ( [Hata Adedi], ALLSELECTED ( DimHataTuru ) ) )
+		formatString: 0%
+		displayFolder: 2 Üretim ve Kalite
+		lineageTag: 7a3f3f5a-9729-5880-832a-a347369b5bde
+
+	/// Pareto için kümülatif pay.
+	measure 'Hata Kümülatif Pay' =
+			VAR mevcut = [Hata Adedi]
+			VAR tablo = ADDCOLUMNS ( ALLSELECTED ( DimHataTuru[Hata Türü] ), "@a", [Hata Adedi] )
+			RETURN IF ( NOT ISBLANK ( mevcut ), DIVIDE ( SUMX ( FILTER ( tablo, [@a] >= mevcut ), [@a] ), SUMX ( tablo, [@a] ) ) )
+		formatString: 0%
+		displayFolder: 2 Üretim ve Kalite
+		lineageTag: 58c84015-02eb-5cf9-af8c-bb482c591713
+
+	/// AM-200 taşlama çıkışı.
+	measure 'Çap Ortalama (mm)' = AVERAGE ( FaktOlcum[CapMm] )
+		formatString: 0.0000
+		displayFolder: 2 Üretim ve Kalite
+		lineageTag: 5a99241f-e7ec-5662-b710-3b338539ea02
+
+	measure 'Çap Std Sapma (mm)' = STDEV.S ( FaktOlcum[CapMm] )
+		formatString: 0.0000
+		displayFolder: 2 Üretim ve Kalite
+		lineageTag: ff9c7517-66a6-5cea-b2df-f4d3ef1d1275
+
+	/// Genel süreç performans indeksi (tolerans 25,000 ± 0,015 mm).
+	measure 'Ppk' =
+			VAR mu = [Çap Ortalama (mm)]
+			VAR s = [Çap Std Sapma (mm)]
+			RETURN DIVIDE ( MIN ( 25.015 - mu, mu - 24.985 ), 3 * s )
+		formatString: 0.00
+		displayFolder: 2 Üretim ve Kalite
+		lineageTag: 4ea4d02d-49a2-5f56-b12a-e7229eb3f7fe
+
+	/// Müşteri şartı.
+	measure 'Ppk Hedef' = IF ( NOT ISBLANK ( [Ppk] ), 1.33 )
+		formatString: 0.00
+		displayFolder: 2 Üretim ve Kalite
+		lineageTag: c4fd033e-ff31-5d29-a533-8fcc22b393e7
+
+	measure 'Ölçüm Sayısı' = COUNTROWS ( FaktOlcum )
+		formatString: #,0
+		displayFolder: 2 Üretim ve Kalite
+		lineageTag: d9808167-8715-56e1-8708-40f099f6c4d5
+
+	measure 'Duruş Süresi (saat)' = DIVIDE ( SUM ( FaktDurus[SureDk] ), 60 )
+		formatString: #,0
+		displayFolder: 3 Duruş ve Bakım
+		lineageTag: 943b7856-d6d3-5075-a3eb-160d162a1cb9
+
+	measure 'Duruş Adedi' = COUNTROWS ( FaktDurus )
+		formatString: #,0
+		displayFolder: 3 Duruş ve Bakım
+		lineageTag: f3f52269-dafa-589a-80fb-cc163810298b
+
+	measure 'Plansız Duruş (saat)' = CALCULATE ( [Duruş Süresi (saat)], DimDurusNedeni[Planlı mı] = "Hayır" )
+		formatString: #,0
+		displayFolder: 3 Duruş ve Bakım
+		lineageTag: 77465967-84f3-5ece-a87d-2cea1a337ed1
+
+	measure 'Duruş Payı' = DIVIDE ( [Plansız Duruş (saat)], CALCULATE ( [Plansız Duruş (saat)], ALLSELECTED ( DimDurusNedeni ) ) )
+		formatString: 0%
+		displayFolder: 3 Duruş ve Bakım
+		lineageTag: 9f46bcc3-7e67-5fe9-85ea-70c142b00e79
+
+	/// Pareto için kümülatif pay.
+	measure 'Duruş Kümülatif Pay' =
+			VAR mevcut = [Plansız Duruş (saat)]
+			VAR tablo = ADDCOLUMNS ( ALLSELECTED ( DimDurusNedeni[Neden] ), "@s", [Plansız Duruş (saat)] )
+			RETURN IF ( NOT ISBLANK ( mevcut ), DIVIDE ( SUMX ( FILTER ( tablo, [@s] >= mevcut ), [@s] ), SUMX ( tablo, [@s] ) ) )
+		formatString: 0%
+		displayFolder: 3 Duruş ve Bakım
+		lineageTag: e3d83965-e66a-5f2e-8240-56967f6c75b7
+
+	measure 'Arıza Sayısı' = CALCULATE ( [Duruş Adedi], DimDurusNedeni[Kategori] = "Arıza" )
+		formatString: #,0
+		displayFolder: 3 Duruş ve Bakım
+		lineageTag: bd274523-0bcf-537a-9942-cc2dfb0d8237
+
+	measure 'Arıza Süresi (saat)' = CALCULATE ( [Duruş Süresi (saat)], DimDurusNedeni[Kategori] = "Arıza" )
+		formatString: #,0
+		displayFolder: 3 Duruş ve Bakım
+		lineageTag: 8a930036-00f4-500d-944d-85e8272cbcb5
+
+	/// Arızalar arası ortalama çalışma süresi.
+	measure 'MTBF (saat)' = DIVIDE ( [Çalışma Süresi (saat)], [Arıza Sayısı] )
+		formatString: #,0.0
+		displayFolder: 3 Duruş ve Bakım
+		lineageTag: 1c7f9237-b3c3-5928-98d1-8df404eac761
+
+	/// Ortalama tamir süresi.
+	measure 'MTTR (dk)' = DIVIDE ( [Arıza Süresi (saat)] * 60, [Arıza Sayısı] )
+		formatString: #,0
+		displayFolder: 3 Duruş ve Bakım
+		lineageTag: 2769b0e8-1d5a-5a9a-a4e5-94354a93cd37
+
+	measure 'Ayar Sayısı' = CALCULATE ( [Duruş Adedi], DimDurusNedeni[NedenID] = "D01" )
+		formatString: #,0
+		displayFolder: 3 Duruş ve Bakım
+		lineageTag: 0db49db2-7c2b-517c-9831-0d8601ab80a7
+
+	/// Ürün değişimi (setup) ortalaması.
+	measure 'Ortalama Ayar Süresi (dk)' = DIVIDE ( CALCULATE ( SUM ( FaktDurus[SureDk] ), DimDurusNedeni[NedenID] = "D01" ), [Ayar Sayısı] )
+		formatString: #,0
+		displayFolder: 3 Duruş ve Bakım
+		lineageTag: beb0e554-466e-5e86-97a7-227dbc80b26c
+
+	measure 'Sipariş Sayısı' = COUNTROWS ( FaktSiparis )
+		formatString: #,0
+		displayFolder: 4 Teslimat ve Maliyet
+		lineageTag: c9e0cd61-8072-5c62-b0cc-a0f5554e455f
+
+	/// Termin tarihinde veya öncesinde sevk edilen siparişlerin oranı.
+	measure 'Zamanında Teslimat' = DIVIDE ( CALCULATE ( COUNTROWS ( FaktSiparis ), FaktSiparis[ZamanindaMi] = 1 ), [Sipariş Sayısı] )
+		formatString: 0.0%
+		displayFolder: 4 Teslimat ve Maliyet
+		lineageTag: 085f32ca-bbf5-5880-953a-efc745f06feb
+
+	measure 'OTD Hedef' = IF ( NOT ISBLANK ( [Zamanında Teslimat] ), 0.95 )
+		formatString: 0%
+		displayFolder: 4 Teslimat ve Maliyet
+		lineageTag: ff350991-6ed5-5a2a-879a-5f10c1959148
+
+	measure 'Geciken Sipariş' = CALCULATE ( [Sipariş Sayısı], FaktSiparis[ZamanindaMi] = 0 )
+		formatString: #,0
+		displayFolder: 4 Teslimat ve Maliyet
+		lineageTag: d8510881-b0d3-5e53-a0cf-591faa575ad9
+
+	/// Geciken siparişlerde ortalama gecikme.
+	measure 'Ort. Gecikme (gün)' = CALCULATE ( AVERAGE ( FaktSiparis[GecikmeGun] ), FaktSiparis[ZamanindaMi] = 0 )
+		formatString: 0.0
+		displayFolder: 4 Teslimat ve Maliyet
+		lineageTag: d051ed20-796a-5fb7-992b-5d9f89ea15ff
+
+	measure 'Ciro (TL)' = SUM ( FaktSiparis[Tutar] )
+		formatString: #,0
+		displayFolder: 4 Teslimat ve Maliyet
+		lineageTag: 9017cbef-0c2d-5c48-b919-13c6583d0a01
+
+	measure 'Gecikme Cezası (TL)' = SUM ( FaktSiparis[CezaTutariTL] )
+		formatString: #,0
+		displayFolder: 4 Teslimat ve Maliyet
+		lineageTag: 6369ddf1-7f26-5641-bf3d-c6be2f1f85e6
+
+	measure 'Ekspres Nakliye (TL)' = SUM ( FaktSiparis[EkspresNakliyeTL] )
+		formatString: #,0
+		displayFolder: 4 Teslimat ve Maliyet
+		lineageTag: 3ce03791-a29d-537d-92ee-bd9b006618fd
+
+	measure 'Fazla Mesai (TL)' = SUM ( FaktMesai[MaliyetTL] )
+		formatString: #,0
+		displayFolder: 4 Teslimat ve Maliyet
+		lineageTag: 338d3e5e-f058-51d2-839d-fa5e7427bfab
+
+	measure 'Fazla Mesai Vardiyası' = SUM ( FaktMesai[VardiyaSayisi] )
+		formatString: #,0
+		displayFolder: 4 Teslimat ve Maliyet
+		lineageTag: 5c3f0b0a-cde5-53ce-9e48-1d26a781c903
+
+	/// Fazla mesai + gecikme cezası + ekspres nakliye.
+	measure 'Kapasite Açığı Maliyeti (TL)' = [Fazla Mesai (TL)] + [Gecikme Cezası (TL)] + [Ekspres Nakliye (TL)]
+		formatString: #,0
+		displayFolder: 4 Teslimat ve Maliyet
+		lineageTag: ae7f1feb-a681-5652-9261-48bff2bdd066
+
+	measure 'Talep (adet)' = CALCULATE ( SUM ( FaktTalep[Adet] ), FaktTalep[Tür] = "Gerçekleşen" )
+		formatString: #,0
+		displayFolder: 5 Tahmin ve Senaryolar
+		lineageTag: f42b5991-2799-5c6c-aa00-86118d1b6d6f
+
+	/// ETS(M,Ad,M) + satış girdisi.
+	measure 'Talep Tahmini (adet)' = CALCULATE ( SUM ( FaktTalep[Adet] ), FaktTalep[Tür] = "Tahmin" )
+		formatString: #,0
+		displayFolder: 5 Tahmin ve Senaryolar
+		lineageTag: a17818af-c9e9-581d-a89b-ce4019c90a30
+
+	measure 'Tahmin Alt %80' = CALCULATE ( SUM ( FaktTalep[Alt %80] ), FaktTalep[Tür] = "Tahmin" )
+		formatString: #,0
+		displayFolder: 5 Tahmin ve Senaryolar
+		lineageTag: 2976412d-afc4-5c8e-a5c9-dc28cc95ff3b
+
+	measure 'Tahmin Üst %80' = CALCULATE ( SUM ( FaktTalep[Üst %80] ), FaktTalep[Tür] = "Tahmin" )
+		formatString: #,0
+		displayFolder: 5 Tahmin ve Senaryolar
+		lineageTag: 2d569dd6-7ed4-5216-8648-5cceb852e291
+
+	/// SimPy kapasite testi, 25 tekrar ortalaması.
+	measure 'Sim Haftalık Çıktı' = SUM ( SimKapasite[Haftalık Çıktı] )
+		formatString: #,0
+		displayFolder: 5 Tahmin ve Senaryolar
+		lineageTag: 0b030897-92ae-50ff-bde5-3f736a06d5b2
+
+	measure 'Sim Kullanım' = AVERAGE ( SimKullanim[Kullanım] )
+		formatString: 0%
+		displayFolder: 5 Tahmin ve Senaryolar
+		lineageTag: 986012d3-528f-5aa8-a628-220aee1da696
+
+	measure 'Opt Üretim' = SUM ( OptPlan[Üretim] )
+		formatString: #,0
+		displayFolder: 5 Tahmin ve Senaryolar
+		lineageTag: cbc22cfa-0733-5263-97d4-6bd1ba1c65c1
+
+	measure 'Opt Talep' = SUM ( OptPlan[Talep] )
+		formatString: #,0
+		displayFolder: 5 Tahmin ve Senaryolar
+		lineageTag: 4dedcab9-b264-5e76-8596-7858c3aa460e
+
+	measure 'Opt Stok' = SUM ( OptPlan[Stok] )
+		formatString: #,0
+		displayFolder: 5 Tahmin ve Senaryolar
+		lineageTag: 2674f1c0-7ce4-5b44-a12b-4f006de797f3
+
+	/// 6 aylık plan maliyeti.
+	measure 'Opt Maliyet (TL)' = SUM ( OptMaliyet[Tutar TL] )
+		formatString: #,0
+		displayFolder: 5 Tahmin ve Senaryolar
+		lineageTag: 89b1b6ea-957b-5ff8-922a-eee4982d50b2
+
+	column Kolon1
+		dataType: string
+		isHidden
+		lineageTag: 43883837-a1ad-5651-b8f2-24658645e6e0
+		summarizeBy: none
+		sourceColumn: Kolon1
+
+	partition '_Ölçüler' = m
+		mode: import
+		source =
+				let
+				    Kaynak = #table(type table [Kolon1 = text], {})
+				in
+				    Kaynak
+
+	annotation PBI_ResultType = Table

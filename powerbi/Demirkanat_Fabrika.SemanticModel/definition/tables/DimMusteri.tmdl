@@ -1,0 +1,40 @@
+table 'DimMusteri'
+	lineageTag: b346eef9-f69e-562c-84e4-cd985f17c120
+
+	column 'MusteriID'
+		dataType: string
+		isHidden
+		lineageTag: 3781f674-94bb-5c80-8a99-ee42d344213b
+		summarizeBy: none
+		sourceColumn: "MusteriID"
+
+	column 'Müşteri'
+		dataType: string
+		lineageTag: e346afe8-35e5-5577-bd26-1d3c0db30f55
+		summarizeBy: none
+		sourceColumn: "Müşteri"
+
+	column 'Segment'
+		dataType: string
+		lineageTag: 5303ce21-fd51-516f-af55-8d6915387ab0
+		summarizeBy: none
+		sourceColumn: "Segment"
+
+	column 'Günlük Ceza Oranı'
+		dataType: double
+		formatString: 0.0%
+		lineageTag: 8265e2f0-a743-5be2-9fbf-be37b44b52c6
+		summarizeBy: none
+		sourceColumn: "Günlük Ceza Oranı"
+
+	partition 'DimMusteri' = m
+		mode: import
+		source =
+				let
+				    Kaynak = Csv.Document(File.Contents(VeriKlasoru & "DimMusteri.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Basliklar = Table.PromoteHeaders(Kaynak, [PromoteAllScalars = true]),
+				    Tipler = Table.TransformColumnTypes(Basliklar, {{"MusteriID", type text}, {"Müşteri", type text}, {"Segment", type text}, {"Günlük Ceza Oranı", type number}}, "en-US")
+				in
+				    Tipler
+
+	annotation PBI_ResultType = Table

@@ -1,0 +1,33 @@
+table 'OptMaliyet'
+	lineageTag: 61270223-dd4e-572c-8c38-e5b779ceacbe
+
+	column 'Durum'
+		dataType: string
+		lineageTag: f0b58aaa-47d4-5672-9aa3-cf9863cc3c2c
+		summarizeBy: none
+		sourceColumn: "Durum"
+
+	column 'Kalem'
+		dataType: string
+		lineageTag: 41f78ab3-041e-5a4a-bf63-6de9fc5bec3b
+		summarizeBy: none
+		sourceColumn: "Kalem"
+
+	column 'Tutar TL'
+		dataType: double
+		formatString: #,0
+		lineageTag: b90e9a04-e7c3-5d14-a380-5a5ef19dca81
+		summarizeBy: none
+		sourceColumn: "Tutar TL"
+
+	partition 'OptMaliyet' = m
+		mode: import
+		source =
+				let
+				    Kaynak = Csv.Document(File.Contents(VeriKlasoru & "OptMaliyet.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Basliklar = Table.PromoteHeaders(Kaynak, [PromoteAllScalars = true]),
+				    Tipler = Table.TransformColumnTypes(Basliklar, {{"Durum", type text}, {"Kalem", type text}, {"Tutar TL", type number}}, "en-US")
+				in
+				    Tipler
+
+	annotation PBI_ResultType = Table

@@ -1,0 +1,4 @@
+expression VeriKlasoru = "D:\Yeni proje\powerbi\veri\" meta [IsParameterQuery = true, Type = "Text", IsParameterQueryRequired = true]
+	lineageTag: 0b09d8ae-3081-52c7-a792-9d8b02c72d6f
+
+	annotation PBI_ResultType = Text

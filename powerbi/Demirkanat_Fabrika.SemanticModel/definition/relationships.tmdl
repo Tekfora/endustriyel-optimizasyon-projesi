@@ -1,0 +1,103 @@
+relationship facbed50-61a1-53be-b200-088fed8f7b20
+	fromColumn: 'FaktUretim'.'Tarih'
+	toColumn: 'DimTarih'.'Tarih'
+
+relationship 2f3fb2c1-a932-5679-bb40-88d3c6b48324
+	fromColumn: 'FaktUretim'.'MakineID'
+	toColumn: 'DimMakine'.'MakineID'
+
+relationship f0dcf702-6727-56a3-80e7-65f42561dc36
+	fromColumn: 'FaktUretim'.'UrunID'
+	toColumn: 'DimUrun'.'UrunID'
+
+relationship 0edcdc52-f295-55c1-9f06-c28eb260acb5
+	fromColumn: 'FaktUretim'.'VardiyaID'
+	toColumn: 'DimVardiya'.'VardiyaID'
+
+relationship f4b2053d-86e3-5d62-ab2f-52af0416ba03
+	fromColumn: 'FaktDurus'.'Tarih'
+	toColumn: 'DimTarih'.'Tarih'
+
+relationship f02ea6f7-84d1-5bf2-bd6e-4dccdd753f45
+	fromColumn: 'FaktDurus'.'MakineID'
+	toColumn: 'DimMakine'.'MakineID'
+
+relationship be12b81b-accb-5a5b-a624-4da7922578e2
+	fromColumn: 'FaktDurus'.'UrunID'
+	toColumn: 'DimUrun'.'UrunID'
+
+relationship f1e624f9-6503-5aa8-80c5-0a8f0634f1ff
+	fromColumn: 'FaktDurus'.'VardiyaID'
+	toColumn: 'DimVardiya'.'VardiyaID'
+
+relationship 0df84a4f-3ca8-5dbf-8513-5f268a962fed
+	fromColumn: 'FaktDurus'.'NedenID'
+	toColumn: 'DimDurusNedeni'.'NedenID'
+
+relationship 30365da7-54dc-5161-9983-cbd8a5e0e586
+	fromColumn: 'FaktKalite'.'Tarih'
+	toColumn: 'DimTarih'.'Tarih'
+
+relationship fe894060-6a9e-53d5-9718-a203d96c89cf
+	fromColumn: 'FaktKalite'.'MakineID'
+	toColumn: 'DimMakine'.'MakineID'
+
+relationship 749bfab7-cbc6-5244-a576-8bfdb130e123
+	fromColumn: 'FaktKalite'.'UrunID'
+	toColumn: 'DimUrun'.'UrunID'
+
+relationship a39d0b9d-8913-5c6e-a223-cf6c29f7342b
+	fromColumn: 'FaktKalite'.'VardiyaID'
+	toColumn: 'DimVardiya'.'VardiyaID'
+
+relationship 31426357-823b-5f6e-8d3c-67fc4c9fd92d
+	fromColumn: 'FaktKalite'.'HataID'
+	toColumn: 'DimHataTuru'.'HataID'
+
+relationship d23f8223-925b-553e-a61d-386e03e443a4
+	fromColumn: 'FaktSiparis'.'TerminTarihi'
+	toColumn: 'DimTarih'.'Tarih'
+
+relationship 0e7e5898-6b3c-599d-9c52-50f54e0cd435
+	fromColumn: 'FaktSiparis'.'UrunID'
+	toColumn: 'DimUrun'.'UrunID'
+
+relationship 008393db-9f08-5b77-8f52-2d662cbb2432
+	fromColumn: 'FaktSiparis'.'MusteriID'
+	toColumn: 'DimMusteri'.'MusteriID'
+
+relationship 996ae156-432b-55bb-8a2a-789a50ed3b02
+	fromColumn: 'FaktOlcum'.'Tarih'
+	toColumn: 'DimTarih'.'Tarih'
+
+relationship 7268fd28-4abe-54e9-a2c5-64387554b578
+	fromColumn: 'FaktOlcum'.'MakineID'
+	toColumn: 'DimMakine'.'MakineID'
+
+relationship 88d6951f-548a-5efc-bc79-38605c086c41
+	fromColumn: 'FaktOlcum'.'UrunID'
+	toColumn: 'DimUrun'.'UrunID'
+
+relationship 95844149-6004-50f2-899e-5795388f0045
+	fromColumn: 'FaktOlcum'.'VardiyaID'
+	toColumn: 'DimVardiya'.'VardiyaID'
+
+relationship 5f8385d6-d09a-5c50-abbf-2fd2fe612181
+	fromColumn: 'FaktMesai'.'Tarih'
+	toColumn: 'DimTarih'.'Tarih'
+
+relationship abc79551-9be0-515c-a975-805aef5de192
+	fromColumn: 'FaktTalep'.'Ay'
+	toColumn: 'DimTarih'.'Tarih'
+
+relationship de76988a-999f-509d-9f36-851d056b7fe8
+	fromColumn: 'FaktTalep'.'UrunID'
+	toColumn: 'DimUrun'.'UrunID'
+
+relationship b83d6f51-54ce-5919-ab19-bafc18e45d7d
+	fromColumn: 'OptPlan'.'Ay'
+	toColumn: 'DimTarih'.'Tarih'
+
+relationship 1128061b-f4be-57e9-86db-004cb9b79155
+	fromColumn: 'OptPlan'.'UrunID'
+	toColumn: 'DimUrun'.'UrunID'

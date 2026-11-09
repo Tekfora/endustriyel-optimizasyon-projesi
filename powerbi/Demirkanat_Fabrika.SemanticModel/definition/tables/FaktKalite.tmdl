@@ -1,0 +1,60 @@
+table 'FaktKalite'
+	lineageTag: cebaaab9-f16d-5ca8-ba17-852fd1c0a9e3
+
+	column 'Tarih'
+		dataType: dateTime
+		isHidden
+		formatString: dd.mm.yyyy
+		lineageTag: ebdd941f-b1ba-581f-bcb6-5434ca1668ee
+		summarizeBy: none
+		sourceColumn: "Tarih"
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'VardiyaID'
+		dataType: string
+		isHidden
+		lineageTag: b4c39da3-96c4-5c0c-84da-44d0820b249c
+		summarizeBy: none
+		sourceColumn: "VardiyaID"
+
+	column 'MakineID'
+		dataType: string
+		isHidden
+		lineageTag: 5ae71ea6-d6ff-5c1a-b29c-0fce2f6c27db
+		summarizeBy: none
+		sourceColumn: "MakineID"
+
+	column 'UrunID'
+		dataType: string
+		isHidden
+		lineageTag: 4be1290e-c881-50f4-95c1-3c1a3de7b79d
+		summarizeBy: none
+		sourceColumn: "UrunID"
+
+	column 'HataID'
+		dataType: string
+		isHidden
+		lineageTag: 1d792c56-f178-5a39-8a2b-3c9de8d09867
+		summarizeBy: none
+		sourceColumn: "HataID"
+
+	column 'Adet'
+		dataType: int64
+		isHidden
+		formatString: #,0
+		lineageTag: 5d561573-aa5a-549c-931b-caec64854f6a
+		summarizeBy: none
+		sourceColumn: "Adet"
+
+	partition 'FaktKalite' = m
+		mode: import
+		source =
+				let
+				    Kaynak = Csv.Document(File.Contents(VeriKlasoru & "FaktKalite.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Basliklar = Table.PromoteHeaders(Kaynak, [PromoteAllScalars = true]),
+				    Tipler = Table.TransformColumnTypes(Basliklar, {{"Tarih", type date}, {"VardiyaID", type text}, {"MakineID", type text}, {"UrunID", type text}, {"HataID", type text}, {"Adet", Int64.Type}}, "en-US")
+				in
+				    Tipler
+
+	annotation PBI_ResultType = Table

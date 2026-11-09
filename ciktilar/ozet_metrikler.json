@@ -1,0 +1,602 @@
+{
+  "analiz": {
+    "frz_oee_baz": 0.6035083592478158,
+    "frz_oee_pilot": 0.7030808869327345,
+    "frz_kullanilabilirlik_baz": 0.7488201081081081,
+    "frz_performans_baz": 0.8234843094258686,
+    "frz_kalite_baz": 0.978701971846972,
+    "frz_kullanilabilirlik_pilot": 0.8413175896222502,
+    "frz_performans_pilot": 0.8490423989361779,
+    "frz_kapasite_kullanimi_baz": 1.0,
+    "hat1_oee_baz": 0.7411040130429162,
+    "hat2_oee_baz": 0.8102089564199689,
+    "otd_hat1_baz": 0.8398268398268398,
+    "otd_hat2_baz": 0.9951690821256038,
+    "otd_toplam_baz": 0.8878923766816144,
+    "otd_hat1_pilot": 0.8780487804878049,
+    "otd_hat1_pilot_2_4_hafta": 0.9444444444444444,
+    "otd_hat1_haziran": 0.1794871794871795,
+    "ceza_baz_tl": 324122.0,
+    "ekspres_baz_tl": 218500,
+    "fazla_mesai_baz_tl": 1144000,
+    "fazla_mesai_baz_pazar": 10,
+    "fazla_mesai_baz_vardiya": 22,
+    "hurda_maliyeti_baz_tl": 7389488.9,
+    "hurda_orani_hat1_baz": 0.012204474533241657,
+    "ciro_baz_tl": 262974000,
+    "siparis_sayisi_baz": 669,
+    "geciken_siparis_baz": 75,
+    "ort_gecikme_gun_baz": 1.6266666666666667,
+    "kapasite_kullanimi_baz": {
+      "H2-BLN": 0.198,
+      "H2-DLK": 0.261,
+      "H1-TST": 0.568,
+      "H2-DTR": 0.571,
+      "H1-TRN1": 0.623,
+      "H1-TRN2": 0.64,
+      "H1-ISL": 0.654,
+      "H1-TSL": 0.739,
+      "H1-FRZ": 1.0
+    },
+    "frz_kayip_payi": {
+      "Planlanan süre": 1.0,
+      "Ayar & değişim": 0.106,
+      "Arıza": 0.0993,
+      "Diğer duruşlar": 0.0459,
+      "Hız kaybı ve küçük duruşlar": 0.1322,
+      "Kalite kaybı": 0.0131,
+      "OEE (değer katan süre)": 0.6035
+    },
+    "frz_durus_pareto": {
+      "Mekanik arıza": 0.3634,
+      "Ürün değişimi (setup)": 0.3248,
+      "İlk parça onayı / ayar": 0.097,
+      "Malzeme bekleme": 0.0813,
+      "Takım kırılması / uç değişimi": 0.0448,
+      "Kalite problemi / ölçüm": 0.0389,
+      "Elektrik/elektronik arıza": 0.0321,
+      "Operatör yok / geç başlama": 0.0178
+    },
+    "frz_plansiz_durus_saat_baz": 1742.5616666666667,
+    "vardiya_oee_farki_A_C_puan": 6.278255315751243,
+    "hurda_boyutsal_pay": 0.5278981581798483,
+    "hurda_gece_kat": 1.4307181003999037,
+    "hata_pareto_hat1": {
+      "Ölçü dışı (çap/boy)": 0.4216,
+      "Yüzey hatası (çizik/darbe)": 0.1649,
+      "Çapak": 0.1567,
+      "Salgı / yuvarlaklık": 0.1063,
+      "Sertlik değeri dışı": 0.1042,
+      "Çatlak": 0.0463
+    },
+    "frz_dk_basina_kayip_adet": 1.135081216428423,
+    "frz_regresyon": {
+      "r2": 0.7315657409084599,
+      "katsayilar": {
+        "const": 591.171,
+        "AyarDk": -1.135,
+        "ArizaDk": -1.314,
+        "DigerDk": -1.493
+      },
+      "n_vardiya": 925
+    },
+    "istatistik_testleri": [
+      {
+        "Hipotez": "Vardiya → H1-FRZ OEE",
+        "Test": "Tek yönlü ANOVA",
+        "İstatistik": "F = 18.6",
+        "p_degeri": "1.16e-08",
+        "Yorum": "Ortalama OEE A %62,3, B %62,8, C %55,9",
+        "Sonuç (α = 0,05)": "Anlamlı"
+      },
+      {
+        "Hipotez": "Vardiya → H1-FRZ OEE",
+        "Test": "Kruskal-Wallis (dağılımdan bağımsız)",
+        "İstatistik": "H = 50.1",
+        "p_degeri": "1.35e-11",
+        "Yorum": "ANOVA sonucunu doğruluyor",
+        "Sonuç (α = 0,05)": "Anlamlı"
+      },
+      {
+        "Hipotez": "Vardiya → hurda oranı (Hat-1)",
+        "Test": "Ki-kare bağımsızlık testi",
+        "İstatistik": "χ² = 806",
+        "p_degeri": "1.16e-175",
+        "Yorum": "Gece vardiyasında hurda oranı anlamlı biçimde yüksek",
+        "Sonuç (α = 0,05)": "Anlamlı"
+      },
+      {
+        "Hipotez": "Vardiyadaki duruş dakikaları → H1-FRZ vardiya çıktısı",
+        "Test": "Çoklu doğrusal regresyon (OLS)",
+        "İstatistik": "ayar katsayısı = -1.14 adet/dk, R² = 0.73",
+        "p_degeri": "2.80e-127",
+        "Yorum": "H1-FRZ'de 1 dk duruş ≈ 1.14 sağlam parça kaybı",
+        "Sonuç (α = 0,05)": "Anlamlı"
+      },
+      {
+        "Hipotez": "Pilot → H1-FRZ ayar süresi",
+        "Test": "Welch t-testi",
+        "İstatistik": "t = 12.9",
+        "p_degeri": "7.53e-19",
+        "Yorum": "Ortalama 74 dk → 29 dk",
+        "Sonuç (α = 0,05)": "Anlamlı"
+      },
+      {
+        "Hipotez": "Pilot → H1-FRZ arıza sıklığı",
+        "Test": "Poisson oran testi (koşullu binom)",
+        "İstatistik": "9.20 → 5.94 arıza/100 çalışma saati",
+        "p_degeri": "1.23e-02",
+        "Yorum": "TPM sonrası arıza sıklığı düştü",
+        "Sonuç (α = 0,05)": "Anlamlı"
+      }
+    ],
+    "vardiya_oee_frz": {
+      "A": 0.6225071166678384,
+      "B": 0.6277542035958947,
+      "C": 0.5588014527989984
+    },
+    "spc": {
+      "Baz": {
+        "ort": 25.001898055555557,
+        "s_genel": 0.004444084056439915,
+        "s_ic": 0.003610155727524602,
+        "Cp": 1.3849818061528805,
+        "Cpk": 1.2097303120519438,
+        "Ppk": 0.9827255198933018
+      },
+      "Pilot": {
+        "ort": 25.000542195121955,
+        "s_genel": 0.0036295648349258312,
+        "s_ic": 0.0033450076547197945,
+        "Cp": 1.494764890282151,
+        "Cpk": 1.4407346081500843,
+        "Ppk": 1.3277812938641818
+      },
+      "Baz-Gece": {
+        "ort": 25.005358424657537,
+        "s_genel": 0.003954444699737884,
+        "s_ic": 0.003734731857854706,
+        "Cp": 1.3387841993219494,
+        "Cpk": 0.8605325816708002,
+        "Ppk": 0.8127205439744603
+      },
+      "Baz-Gündüz": {
+        "ort": 25.00048684357542,
+        "s_genel": 0.003815105428514328,
+        "s_ic": 0.0035593509369430507,
+        "Cp": 1.4047504976551821,
+        "Cpk": 1.3591575806651113,
+        "Ppk": 1.2680432818543392
+      }
+    },
+    "spc_kontrol_limitleri": {
+      "Baz": {
+        "UCL": 25.00674325277778,
+        "X̿": 25.001898055555557,
+        "LCL": 24.997052858333333
+      },
+      "Pilot": {
+        "UCL": 25.005031536585367,
+        "X̿": 25.00054219512195,
+        "LCL": 24.996052853658536
+      }
+    },
+    "spc_kontrol_disi_oran_baz": 0.10912698412698413,
+    "otd_aylik_hat1": {
+      "Eki 25": 0.976,
+      "Kas 25": 0.722,
+      "Ara 25": 1.0,
+      "Oca 26": 1.0,
+      "Şub 26": 1.0,
+      "Mar 26": 0.923,
+      "Nis 26": 0.95,
+      "May 26": 0.676,
+      "Haz 26": 0.179,
+      "Tem 26": 0.857,
+      "Ağu 26": 0.946,
+      "Eyl 26": 0.821,
+      "Eki 26": 0.878
+    },
+    "kapasite_acigi_maliyeti_baz_tl": 1686622.0,
+    "mtbf_mttr_baz": {
+      "H1-TST": {
+        "MTBF_saat": 48.7,
+        "MTTR_dk": 68.6
+      },
+      "H1-TRN1": {
+        "MTBF_saat": 42.1,
+        "MTTR_dk": 54.7
+      },
+      "H1-TRN2": {
+        "MTBF_saat": 35.3,
+        "MTTR_dk": 60.8
+      },
+      "H1-FRZ": {
+        "MTBF_saat": 10.9,
+        "MTTR_dk": 86.5
+      },
+      "H1-ISL": {
+        "MTBF_saat": 41.1,
+        "MTTR_dk": 65.5
+      },
+      "H1-TSL": {
+        "MTBF_saat": 37.9,
+        "MTTR_dk": 63.8
+      },
+      "H2-DTR": {
+        "MTBF_saat": 32.4,
+        "MTTR_dk": 64.4
+      },
+      "H2-DLK": {
+        "MTBF_saat": 44.7,
+        "MTTR_dk": 42.8
+      },
+      "H2-BLN": {
+        "MTBF_saat": 45.0,
+        "MTTR_dk": 56.8
+      }
+    },
+    "pilot": {
+      "ayar_dk_baz": 73.83217391304346,
+      "ayar_dk_pilot": 29.094117647058823,
+      "mtbf_baz": 10.868074267782424,
+      "mtbf_pilot": 16.841209876543207
+    },
+    "sim_parametre_ozeti": {
+      "H1-FRZ": {
+        "MTBF_saat": 10.9,
+        "setup_farkli_ort": 83.5
+      },
+      "H1-TSL": {
+        "MTBF_saat": 37.9,
+        "setup_farkli_ort": 37.4
+      }
+    }
+  },
+  "tahmin": {
+    "secilen_model": "ETS (Holt-Winters)",
+    "mape": {
+      "3 aylık hareketli ort.": 0.0766,
+      "ETS (Holt-Winters)": 0.053,
+      "Mevsimsel naif": 0.0644
+    },
+    "hat1_aylik_tahmin": {
+      "Kas 26": 37700,
+      "Ara 26": 34550,
+      "Oca 27": 31950,
+      "Şub 27": 35400,
+      "Mar 27": 38000,
+      "Nis 27": 38250
+    },
+    "hat1_tahmin_ortalama": 35975.0,
+    "hat1_gecen_yil_ayni_donem": 33175.0,
+    "artis_orani": 0.08440090429540326,
+    "zirve_ay": "Nis 27",
+    "frz_yuk_mevcut": {
+      "Kas 26": 1.123,
+      "Ara 26": 0.953,
+      "Oca 27": 0.949,
+      "Şub 27": 1.094,
+      "Mar 27": 1.177,
+      "Nis 27": 1.136
+    },
+    "frz_yuk_pilot": {
+      "Kas 26": 0.964,
+      "Ara 26": 0.818,
+      "Oca 27": 0.815,
+      "Şub 27": 0.939,
+      "Mar 27": 1.01,
+      "Nis 27": 0.975
+    },
+    "kapasite_asan_ay_sayisi": 4
+  },
+  "simulasyon": {
+    "pilot_olcumleri": {
+      "setup": 0.3940574427799552,
+      "onay": 0.4651201207124401,
+      "mtbf": 1.549603863719232,
+      "mttr": 1.0502131790445968,
+      "perf": 0.025558089510309245,
+      "p_degisim_baz": 0.41681362201415006,
+      "setup_hafta_baz_gercek": 8.846153846153847
+    },
+    "haftalik_talep_tahmini": 8634.0,
+    "zirve_haftalik_talep": 9180.0,
+    "dogrulama": {
+      "gercek_haftalik_cikti": 7854.996677740864,
+      "sim_haftalik_cikti_S0": 7813.013333333333,
+      "fark": -0.005344794674006725,
+      "sim_frz_oee_S0": 0.599792647462277,
+      "gercek_frz_oee": 0.6035083592478158,
+      "sim_frz_setup_hafta_S0": 9.193333333333333,
+      "gercek_frz_setup_hafta": 8.846153846153847,
+      "haftalik_talep": 8634.0
+    },
+    "kapasite": {
+      "S0": {
+        "ad": "Mevcut durum",
+        "haftalik_cikti": 7813.013333333333,
+        "ci_yari": 58.0714082248478,
+        "artis": 0.0,
+        "frz_oee": 0.599792647462277,
+        "darbogaz": "Freze",
+        "frz_setup_hafta": 9.193333333333333,
+        "kullanim": {
+          "Kesim": 0.557,
+          "Torna": 0.618,
+          "Freze": 1.0,
+          "Isıl işlem": 0.65,
+          "Taşlama": 0.737
+        }
+      },
+      "S1": {
+        "ad": "SMED (hızlı ürün değişimi)",
+        "haftalik_cikti": 8370.45,
+        "ci_yari": 66.31687090370906,
+        "artis": 0.07134720534629424,
+        "frz_oee": 0.6419669958847736,
+        "darbogaz": "Freze",
+        "frz_setup_hafta": 9.833333333333334,
+        "kullanim": {
+          "Kesim": 0.596,
+          "Torna": 0.659,
+          "Freze": 1.0,
+          "Isıl işlem": 0.696,
+          "Taşlama": 0.787
+        }
+      },
+      "S2": {
+        "ad": "TPM (önleyici bakım)",
+        "haftalik_cikti": 8185.243333333333,
+        "ci_yari": 50.37916693758325,
+        "artis": 0.04764230958264504,
+        "frz_oee": 0.6315466666666666,
+        "darbogaz": "Freze",
+        "frz_setup_hafta": 9.743333333333334,
+        "kullanim": {
+          "Kesim": 0.586,
+          "Torna": 0.649,
+          "Freze": 1.0,
+          "Isıl işlem": 0.683,
+          "Taşlama": 0.773
+        }
+      },
+      "S3": {
+        "ad": "SMED + TPM",
+        "haftalik_cikti": 8777.33,
+        "ci_yari": 77.1223753802733,
+        "artis": 0.12342442352587812,
+        "frz_oee": 0.6765485596707818,
+        "darbogaz": "Freze",
+        "frz_setup_hafta": 10.136666666666667,
+        "kullanim": {
+          "Kesim": 0.627,
+          "Torna": 0.694,
+          "Freze": 1.0,
+          "Isıl işlem": 0.73,
+          "Taşlama": 0.829
+        }
+      },
+      "S4": {
+        "ad": "SMED + TPM + kampanya planlama",
+        "haftalik_cikti": 8977.563333333332,
+        "ci_yari": 41.658276169569945,
+        "artis": 0.1490526062500852,
+        "frz_oee": 0.6861498765432101,
+        "darbogaz": "Freze",
+        "frz_setup_hafta": 8.053333333333335,
+        "kullanim": {
+          "Kesim": 0.632,
+          "Torna": 0.692,
+          "Freze": 1.0,
+          "Isıl işlem": 0.736,
+          "Taşlama": 0.824
+        }
+      },
+      "S5": {
+        "ad": "Yeni işleme merkezi (FRZ-2)",
+        "haftalik_cikti": 10535.373333333333,
+        "ci_yari": 52.06459225154322,
+        "artis": 0.348439185222603,
+        "frz_oee": 0.4047390672153635,
+        "darbogaz": "Taşlama",
+        "frz_setup_hafta": 23.4,
+        "kullanim": {
+          "Kesim": 0.751,
+          "Torna": 0.832,
+          "Freze": 0.737,
+          "Isıl işlem": 0.885,
+          "Taşlama": 1.0
+        }
+      },
+      "S6": {
+        "ad": "SMED + TPM yalnızca Taşlama'da",
+        "haftalik_cikti": 7818.643333333333,
+        "ci_yari": 58.95257210896489,
+        "artis": 0.0007205926522588779,
+        "frz_oee": 0.6007408779149521,
+        "darbogaz": "Freze",
+        "frz_setup_hafta": 9.116666666666667,
+        "kullanim": {
+          "Kesim": 0.558,
+          "Torna": 0.616,
+          "Freze": 1.0,
+          "Isıl işlem": 0.65,
+          "Taşlama": 0.694
+        }
+      }
+    },
+    "talep": {
+      "S0": {
+        "tedarik_gun": 6.666024846582659,
+        "hizmet": 0.381115029689075,
+        "wip": 10381.643155163974,
+        "kararsiz": true
+      },
+      "S1": {
+        "tedarik_gun": 4.242788386466133,
+        "hizmet": 0.6734130637492691,
+        "wip": 6638.466384707851,
+        "kararsiz": true
+      },
+      "S2": {
+        "tedarik_gun": 4.473917419291217,
+        "hizmet": 0.6427960922520586,
+        "wip": 6933.772489248335,
+        "kararsiz": true
+      },
+      "S3": {
+        "tedarik_gun": 2.7580376059787257,
+        "hizmet": 0.8749962587753456,
+        "wip": 4275.548457120098,
+        "kararsiz": false
+      },
+      "S4": {
+        "tedarik_gun": 4.2195844745062265,
+        "hizmet": 0.6808829496510305,
+        "wip": 6564.610581955278,
+        "kararsiz": false
+      },
+      "S5": {
+        "tedarik_gun": 1.2281615993783461,
+        "hizmet": 1.0,
+        "wip": 1865.5811867430682,
+        "kararsiz": false
+      },
+      "S6": {
+        "tedarik_gun": 6.516863919477637,
+        "hizmet": 0.3601910165475521,
+        "wip": 9809.407635417112,
+        "kararsiz": true
+      }
+    }
+  },
+  "optimizasyon": {
+    "verim": {
+      "Baz_M04": {
+        "P": 0.8234843094258686,
+        "Q": 0.978701971846972,
+        "alfa": 0.1452276996996997,
+        "setup_dk": 95.87521739130435,
+        "setup_1000": 1.0877198790266325
+      },
+      "Baz_M06": {
+        "P": 0.87349392605373,
+        "Q": 0.9859047711995705,
+        "alfa": 0.05257284999601488,
+        "setup_dk": 45.098908296943236,
+        "setup_1000": 1.1174683729611692
+      },
+      "Pilot_M04": {
+        "P": 0.8490423989361779,
+        "Q": 0.984273844782848,
+        "alfa": 0.1289761902075141,
+        "setup_dk": 37.55588235294118,
+        "setup_1000": 0.8911487956386129
+      },
+      "Pilot_M06": {
+        "P": 0.8807901619330323,
+        "Q": 0.9870147327669642,
+        "alfa": 0.058000767529833165,
+        "setup_dk": 45.596774193548384,
+        "setup_1000": 0.8334229487041618
+      }
+    },
+    "durumlar": {
+      "A": {
+        "ad": "Mevcut planlama · mevcut verim",
+        "toplam_tl": 4933618.653323044,
+        "kalemler": {
+          "Fazla mesai": 2288000,
+          "Gecikme (ceza + ekspres)": 1961689.2107058964,
+          "Stok taşıma": 26314.13171150591,
+          "Ürün değişimi (ayar)": 559866.8669391943,
+          "Emniyet stoğu açığı": 97748.44396644697
+        },
+        "mesai_vardiya": 44
+      },
+      "B": {
+        "ad": "Optimal plan · mevcut verim",
+        "toplam_tl": 1579255.9014618,
+        "kalemler": {
+          "Fazla mesai": 1196000.0,
+          "Gecikme (ceza + ekspres)": 7324.46286,
+          "Stok taşıma": 109860.029904,
+          "Ürün değişimi (ayar)": 227500.0,
+          "Emniyet stoğu açığı": 38571.4086978
+        },
+        "mesai_vardiya": 23.0
+      },
+      "C": {
+        "ad": "Mevcut planlama · pilot verimi",
+        "toplam_tl": 1803403.8713161172,
+        "kalemler": {
+          "Fazla mesai": 1144000,
+          "Gecikme (ceza + ekspres)": 0.0,
+          "Stok taşıma": 72410.40000000001,
+          "Ürün değişimi (ayar)": 586993.4713161173,
+          "Emniyet stoğu açığı": 0.0
+        },
+        "mesai_vardiya": 22
+      },
+      "D": {
+        "ad": "Optimal plan · pilot verimi",
+        "toplam_tl": 349507.67276359996,
+        "kalemler": {
+          "Fazla mesai": 0.0,
+          "Gecikme (ceza + ekspres)": 0.0,
+          "Stok taşıma": 87207.1628856,
+          "Ürün değişimi (ayar)": 237500.0,
+          "Emniyet stoğu açığı": 24800.509878
+        },
+        "mesai_vardiya": 0.0
+      }
+    },
+    "tasarruf_D_vs_A": 0.9291579472750313,
+    "tasarruf_B_vs_A": 0.6798990735941679,
+    "frz_saat_degeri_tl": 6693.153575949996,
+    "on_uretim_ayi": "Oca 27"
+  },
+  "finans": {
+    "C": {
+      "npv_p10": 23721295.852369938,
+      "npv_p50": 55915321.346605875,
+      "npv_p90": 97526073.84027047,
+      "pozitif_olasilik": 1.0,
+      "makine_alinma_olasilik": 0.8147,
+      "makine_alim_yili_p50": 3.0
+    },
+    "en_iyi_secenek_olasilik": {
+      "A": 0.2762,
+      "B": 0.0031,
+      "C": 0.7207
+    },
+    "C_A_dan_iyi": 0.7231,
+    "C_B_den_iyi": 0.9968,
+    "hurda_tasarrufu_yillik_tl": 728675.3047667039,
+    "A": {
+      "npv_p10": 23796334.229787502,
+      "npv_p50": 47265961.6389031,
+      "npv_p90": 69418158.02840835,
+      "pozitif_olasilik": 1.0,
+      "geri_odeme_ay_p50": 3.0,
+      "yil1_fayda_p50": 7897138.0646108575,
+      "capex_p50": 1859551.9508700792
+    },
+    "B": {
+      "npv_p10": 12018877.471011637,
+      "npv_p50": 47358034.25578804,
+      "npv_p90": 83655571.6860091,
+      "pozitif_olasilik": 0.9771,
+      "geri_odeme_ay_p50": 19.0,
+      "geri_odeme_yok_olasilik": 0.0187,
+      "yil1_fayda_p50": 2674754.3916701945,
+      "capex_p50": 8784866.579022333
+    },
+    "A_daha_iyi_olasilik": 0.5463,
+    "N": 10000,
+    "iskonto": 0.12,
+    "ufuk_yil": 5,
+    "en_iyi": "C"
+  }
+}

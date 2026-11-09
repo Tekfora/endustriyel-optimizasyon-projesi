@@ -1,0 +1,84 @@
+table 'FaktDurus'
+	lineageTag: 45af62d5-a9b3-5f2d-8cce-38f7384cc311
+
+	column 'DurusID'
+		dataType: int64
+		isHidden
+		formatString: #,0
+		lineageTag: 54f54e34-a0da-509f-a672-80b322258ba3
+		summarizeBy: none
+		sourceColumn: "DurusID"
+
+	column 'Tarih'
+		dataType: dateTime
+		isHidden
+		formatString: dd.mm.yyyy
+		lineageTag: 411f5735-d33f-5547-b048-cb741e311944
+		summarizeBy: none
+		sourceColumn: "Tarih"
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'VardiyaID'
+		dataType: string
+		isHidden
+		lineageTag: d89b8d61-5218-5069-8755-f1a25084bc34
+		summarizeBy: none
+		sourceColumn: "VardiyaID"
+
+	column 'MakineID'
+		dataType: string
+		isHidden
+		lineageTag: 50466d13-7ec9-5c9d-993c-e36a40ffe863
+		summarizeBy: none
+		sourceColumn: "MakineID"
+
+	column 'UrunID'
+		dataType: string
+		isHidden
+		lineageTag: 06dc8782-553d-53b3-8a7e-b7c43d15443b
+		summarizeBy: none
+		sourceColumn: "UrunID"
+
+	column 'NedenID'
+		dataType: string
+		isHidden
+		lineageTag: bd6287f9-ca70-52b8-ba57-b7e357a338eb
+		summarizeBy: none
+		sourceColumn: "NedenID"
+
+	column 'BaslangicZamani'
+		dataType: dateTime
+		isHidden
+		formatString: dd.mm.yyyy hh:nn
+		lineageTag: fcffa3b8-3e62-58be-a717-d8e00e2e0fad
+		summarizeBy: none
+		sourceColumn: "BaslangicZamani"
+
+	column 'SureDk'
+		dataType: double
+		isHidden
+		formatString: #,0.00
+		lineageTag: 1e3a8220-8bba-522d-b40c-ca6cc4285877
+		summarizeBy: none
+		sourceColumn: "SureDk"
+
+	column 'FazlaMesai'
+		dataType: int64
+		isHidden
+		formatString: #,0
+		lineageTag: e85f8bad-6fb0-54f3-ad6d-b14bcf7d5fc0
+		summarizeBy: none
+		sourceColumn: "FazlaMesai"
+
+	partition 'FaktDurus' = m
+		mode: import
+		source =
+				let
+				    Kaynak = Csv.Document(File.Contents(VeriKlasoru & "FaktDurus.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Basliklar = Table.PromoteHeaders(Kaynak, [PromoteAllScalars = true]),
+				    Tipler = Table.TransformColumnTypes(Basliklar, {{"DurusID", Int64.Type}, {"Tarih", type date}, {"VardiyaID", type text}, {"MakineID", type text}, {"UrunID", type text}, {"NedenID", type text}, {"BaslangicZamani", type datetime}, {"SureDk", type number}, {"FazlaMesai", Int64.Type}}, "en-US")
+				in
+				    Tipler
+
+	annotation PBI_ResultType = Table

@@ -1,0 +1,72 @@
+table 'OptPlan'
+	lineageTag: 3d8faf8e-aab7-5e6d-b138-fddf9c5db2ec
+
+	column 'Ay'
+		dataType: dateTime
+		isHidden
+		formatString: dd.mm.yyyy
+		lineageTag: f2c12a60-398e-592c-bc82-9d92c435e230
+		summarizeBy: none
+		sourceColumn: "Ay"
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'UrunID'
+		dataType: string
+		isHidden
+		lineageTag: 6bfba152-1f52-5431-8df8-eee12cd699f8
+		summarizeBy: none
+		sourceColumn: "UrunID"
+
+	column 'Talep'
+		dataType: double
+		formatString: #,0
+		lineageTag: a4309beb-7f3b-5ada-89aa-1c0ca317a083
+		summarizeBy: none
+		sourceColumn: "Talep"
+
+	column 'Üretim'
+		dataType: double
+		formatString: #,0
+		lineageTag: 19584897-0fa4-5611-a02a-7aabbb6ac5e3
+		summarizeBy: none
+		sourceColumn: "Üretim"
+
+	column 'Stok'
+		dataType: double
+		formatString: #,0
+		lineageTag: 68224bf4-a0b9-51c9-834d-fcbc76cfa5c8
+		summarizeBy: none
+		sourceColumn: "Stok"
+
+	column 'Birikmiş'
+		dataType: double
+		formatString: #,0
+		lineageTag: f9172a44-d92e-5e19-8e4c-05998839e93a
+		summarizeBy: none
+		sourceColumn: "Birikmiş"
+
+	column 'Kampanya'
+		dataType: double
+		formatString: 0.0
+		lineageTag: 7e5245f6-e8de-5e4b-8207-9e11b4a33f46
+		summarizeBy: none
+		sourceColumn: "Kampanya"
+
+	column 'Durum'
+		dataType: string
+		lineageTag: 01c43b8f-f98d-5519-9158-420419825906
+		summarizeBy: none
+		sourceColumn: "Durum"
+
+	partition 'OptPlan' = m
+		mode: import
+		source =
+				let
+				    Kaynak = Csv.Document(File.Contents(VeriKlasoru & "OptPlan.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Basliklar = Table.PromoteHeaders(Kaynak, [PromoteAllScalars = true]),
+				    Tipler = Table.TransformColumnTypes(Basliklar, {{"Ay", type date}, {"UrunID", type text}, {"Talep", type number}, {"Üretim", type number}, {"Stok", type number}, {"Birikmiş", type number}, {"Kampanya", type number}, {"Durum", type text}}, "en-US")
+				in
+				    Tipler
+
+	annotation PBI_ResultType = Table
